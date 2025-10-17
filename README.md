@@ -22,9 +22,9 @@ In this repository, we present a novel approach to LM-based evolutionary optimiz
 
 Our approach consist in 2 parts:
 
-- Pretraining: This first stage is used to generate as many python programs possible to solve ARC-AGI using the trainset, for this we used the same strategy than Test-Time Adaptation, by creating 1 dataset per task using the one-leave-out strategy to generate multiple trainset samples. Then we train our system on each task individually until solved, the training here involve an evolutionary strategy throught our optimizer (OMEGA) where programs has a self-evolving python script (their variable) to solve the task, for each batch a new variable is generated and evaluated against the validation set, at the end of an epoch, the best candidates are selected (based on Dominated Novelty Search approach) and the training continue until the task is solved or no progression is done (using an EarlyStopping mechanism). During the pre-training, a library of programs is constructed (similar to AlphaEvolve), this library is used during pre-training to find the best seeds per task, allowing to reduce the computation needs, this can be described as a form of neuro-symbolic continuous/transfer learning.
+- **Pretraining**: This first stage is used to generate as many python programs possible to solve ARC-AGI using the trainset, for this we used the same strategy than Test-Time Adaptation, by creating 1 dataset per task using the one-leave-out strategy to generate multiple trainset samples. Then we train our system on each task individually until solved, the training here involve an evolutionary strategy throught our optimizer (OMEGA) where programs has a self-evolving python script (their variable) to solve the task, for each batch a new variable is generated and evaluated against the validation set, at the end of an epoch, the best candidates are selected (based on Dominated Novelty Search approach) and the training continue until the task is solved or no progression is done (using an EarlyStopping mechanism). During the pre-training, a library of programs is constructed (similar to AlphaEvolve), this library is used during pre-training to find the best seeds per task, allowing to reduce the computation needs, this can be described as a form of neuro-symbolic continuous/transfer learning.
 
-- Solving: At this stage, we use the program library to find the best seeds to solve the testset samples and use the same technique than during the pretraining to solve the task.
+- **Solving**: At this stage, we use the program library to find the best seeds to solve the testset samples and use the same technique than during the pretraining to solve the task.
 
 ## What is Dominated Novelty Search?
 
@@ -51,10 +51,16 @@ python arcagi.py pretrain --epochs 10 --patience 5 --concurrency 20
 To launch the solver, use this command:
 
 ```
-python arcagi.py solve --epochs 10 --patience 5 --concurrency 20
+python arcagi.py solve --epochs 20 --patience 5 --concurrency 20
 ```
 
-## References
+## Tips and warnings
 
+- Start with concurrency 1 to check that everything is fine, then augment it.
+- The cost of pretraining is more or less around 1k$ so beware of your LM costs
+- You can change the embedding model or language model as you wish (refer to Synalinks documentation)
+
+## References
+- [Synalinks: Keras based Neuro-Symbolic LM framework](https://github.com/SynaLinks/synalinks)
 - [Dominated Novelty Search: Rethinking Local Competition in Quality-Diversity](https://arxiv.org/pdf/2502.00593)
 - [AlphaEvolve: A coding agent for scientific and algorithmic discovery](https://arxiv.org/pdf/2506.13131)

@@ -47,9 +47,6 @@ CURRICULUM = True
 MAX_TRAIN_SAMPLES = 10
 REPEAT = 1
 
-# Where to store the tasks data (checkpoint, plots etc.)
-TASKS_DATA_FOLDER = "tasks_data"
-
 # Where to store the learned programs
 PROGRAM_LIBRARY_FOLDER = "program_library"
 
@@ -66,13 +63,15 @@ smart_language_model = synalinks.LanguageModel(
 )
 
 embedding_model = synalinks.EmbeddingModel(
-    model="openai/text-embedding-3-small",
+    model="ollama/mxbai-embed-large",
     caching=True, # cache it to speed up DNS
 )
+
 
 ###############################################################################
 ## Data Models
 ###############################################################################
+
 
 class Color(int, Enum):
     BLACK: int = 0
@@ -171,7 +170,8 @@ async def grid_similarity(y_true, y_pred):
 ###############################################################################
 ## Program library related utils
 ###############################################################################
-    
+
+
 def load_program_library():
     if not os.path.exists(PROGRAM_LIBRARY_FOLDER):
         os.mkdir(PROGRAM_LIBRARY_FOLDER)
@@ -201,24 +201,26 @@ async def find_best_seed_scripts(task_name, x, y, k=3, threshold=0.7):
         for program in PROGRAM_LIBRARY:
             p.update(t, advance=1)
             metrics = await program.evaluate(x=x, y=y, verbose=0)
+            python_script = program.trainable_variables[0].get("python_script")
             if metrics.get("reward") >= threshold:
                 seed_candidates.append(
                     {
-                        "program": program,
+                        "python_script": python_script,
                         **metrics
                     }
                 )
-    sorted_programs = sorted(
+    sorted_candidates = sorted(
         seed_candidates,
         key=lambda x: x.get("reward"),
         reverse=True,
     )
-    best_programs = [x.get("program") for x in sorted_programs[:k]]
     
+    # Take top k candidates
     best_seed_scripts = []
-    for program in best_programs:
-        python_script = program.trainable_variables[0].get("python_script")
+    for program in sorted_candidates[:k]:
+        python_script = program.get("python_script")
         best_seed_scripts.append(python_script)
+    
     print(f"🧠 Found {len(best_seed_scripts)} seeds for {task_name}!")
     return best_seed_scripts
 
@@ -238,63 +240,10 @@ def transform(inputs):
 result = transform(inputs)
 """
 
-
-def get_seed_generator_instructions(default_python_script):
-    return \
-f"""
-You are an expert in logic and puzzle, you are tasked to solve this ARCAGI task using python
-
-Here is code you should adapt:
-
-```python
-{default_python_script}
-```
-
-Give your answer in JSON, use the `thinking` field to reason step by step 
-and the `python_script` field for your final answer.
-""".strip()
-
-
-async def build_and_compile_seed_generator(
-    language_model,
-    embedding_model,
-):
-    print(f"🔧 Building seed generator")
-    inputs = synalinks.Input(
-        data_model=ARCAGIInput,
-    )
-    outputs = await synalinks.ChainOfThought(
-        data_model=PythonScript,
-        instructions=get_seed_generator_instructions(get_default_python_script()),
-        language_model=language_model,
-    )(inputs)
-    program = synalinks.Program(
-        inputs=inputs,
-        outputs=outputs,
-        name=f"arcagi_task_{task_name}",
-        description="Program to generate python scripts for ARC-AGI",
-    )
-    print(f"🪛 Compiling seed generator")
-    program.compile(
-        reward=synalinks.rewards.LMAsJudge(
-            language_model=language_model,
-        ),
-        optimizer=synalinks.optimizers.OMEGA(
-            language_model=language_model,
-            embedding_model=embedding_model,
-            population_size=POPULATION_SIZE,
-            k_nearest_fitter=K_NEAREST_FITTER,
-            mutation_temperature=MUTATION_TEMPERATURE,
-            crossover_temperature=CROSSOVER_TEMPERATURE,
-            merging_rate=MERGING_RATE,
-        ),
-    )
-    return program
-
-
 async def build_and_compile_solver(
     language_model,
     embedding_model,
+    python_script,
     seed_scripts,
     task_name,
     verbose=False,
@@ -309,7 +258,8 @@ async def build_and_compile_solver(
         python_script=get_default_python_script(),
         seed_scripts=seed_scripts if seed_scripts else None,
         # If the python script raise an exception, it returns an empty grid
-        default_return_value={"output_grid": [[]]}, 
+        default_return_value={"output_grid": [[]]},
+        name="python_synthesis",
     )(inputs)
     program = synalinks.Program(
         inputs=inputs,
@@ -323,6 +273,7 @@ async def build_and_compile_solver(
         reward=synalinks.rewards.RewardFunctionWrapper(
             in_mask=["output_grid"],
             fn=grid_similarity,
+            name="reward",
         ),
         optimizer=synalinks.optimizers.OMEGA(
             language_model=language_model,
@@ -332,6 +283,7 @@ async def build_and_compile_solver(
             mutation_temperature=MUTATION_TEMPERATURE,
             crossover_temperature=CROSSOVER_TEMPERATURE,
             merging_rate=MERGING_RATE,
+            name="omega",
         ),
         metrics=[
             synalinks.metrics.MeanMetricWrapper(
@@ -355,6 +307,7 @@ async def learn_task(task_name, epochs, patience):
     
     program = await build_and_compile_solver(
         task_name=task_name,
+        python_script=get_default_python_script(),
         seed_scripts=seed_scripts,
         language_model=fast_language_model,
         embedding_model=embedding_model,
@@ -402,6 +355,7 @@ async def solve_task(task_name, epochs, patience):
     
     program = await build_and_compile_solver(
         task_name=task_name,
+        python_script=get_default_python_script(),
         seed_scripts=seed_scripts,
         language_model=fast_language_model,
         embedding_model=embedding_model,
@@ -545,12 +499,21 @@ def arcagi():
 def pretrain(epochs, patience, concurrency):
     """run ARCAGI2 pretraining"""
     asyncio.run(pretraining(epochs, patience, concurrency))
-    
+
 
 @arcagi.command()
 @click.option('--epochs', default=10, help='Number of epochs.')
 @click.option('--patience', default=5, help='Number of epochs to wait before stopping if no progress.')
-@click.option('--concurrency', default=20, help='Number of tasks to solve in parrallel.')
+@click.option('--concurrency', default=1, help='Number of tasks to solve in parrallel.')
+def pretrain(epochs, patience, concurrency):
+    """run ARCAGI2 pretraining"""
+    asyncio.run(pretraining(epochs, patience, concurrency))
+
+
+@arcagi.command()
+@click.option('--epochs', default=20, help='Number of epochs.')
+@click.option('--patience', default=7, help='Number of epochs to wait before stopping if no progress.')
+@click.option('--concurrency', default=1, help='Number of tasks to solve in parrallel.')
 def solve(epochs, patience, concurrency):
     """run ARCAGI2 solver"""
     asyncio.run(solving(epochs, patience, concurrency))
