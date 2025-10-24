@@ -50,7 +50,7 @@ For pretraining:
 python arcagi2.py --mode pretrain --epochs 10 --patience 5 --repeat 1 --concurrency 1
 ```
 
-**Note**: We already pretrained it once (**47%** tasks completed), but you can solve more tasks by running it again with more epochs and repeating the trainset data with `--repeat`. The cost is **NOT NEGLIGEABLE**, so beware of your budget.
+**Note**: We already pretrained it once (**47.5%** tasks completed), but you can solve more tasks by running it again with more epochs and repeating the trainset data with `--repeat`. The cost is **NOT NEGLIGIBLE**, so beware of your budget.
 
 For solving the benchmark:
 
