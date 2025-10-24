@@ -1,1 +1,0 @@
-Where the submission programs are stored

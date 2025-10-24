@@ -1,0 +1,918 @@
+{
+  "module": "synalinks.src.programs.functional",
+  "class_name": "Functional",
+  "config": {
+    "name": "arcagi_task_3979b1a8",
+    "trainable": true,
+    "modules": [
+      {
+        "module": "synalinks.modules",
+        "class_name": "InputModule",
+        "config": {
+          "schema": {
+            "$defs": {
+              "ARCAGITask": {
+                "additionalProperties": false,
+                "description": "Single transformation example",
+                "properties": {
+                  "input_grid": {
+                    "description": "The input grid (list of integer list)",
+                    "items": {
+                      "items": {
+                        "$ref": "#/$defs/Color"
+                      },
+                      "type": "array"
+                    },
+                    "title": "Input Grid",
+                    "type": "array"
+                  },
+                  "output_grid": {
+                    "description": "The output grid (list of integer list)",
+                    "items": {
+                      "items": {
+                        "$ref": "#/$defs/Color"
+                      },
+                      "type": "array"
+                    },
+                    "title": "Output Grid",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "input_grid",
+                  "output_grid"
+                ],
+                "title": "ARCAGITask",
+                "type": "object"
+              },
+              "Color": {
+                "description": "ARC-AGI color palette",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9
+                ],
+                "title": "Color",
+                "type": "integer"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Input for the ARC-AGI solver",
+            "properties": {
+              "examples": {
+                "description": "A set of transformation examples",
+                "items": {
+                  "$ref": "#/$defs/ARCAGITask"
+                },
+                "title": "Examples",
+                "type": "array"
+              },
+              "input_grid": {
+                "description": "The input grid (list of integer list)",
+                "items": {
+                  "items": {
+                    "$ref": "#/$defs/Color"
+                  },
+                  "type": "array"
+                },
+                "title": "Input Grid",
+                "type": "array"
+              }
+            },
+            "required": [
+              "examples",
+              "input_grid"
+            ],
+            "title": "ARCAGIInput",
+            "type": "object"
+          },
+          "optional": false,
+          "name": "input_module_780",
+          "description": "Defines the input data model for a program."
+        },
+        "registered_name": null,
+        "name": "input_module_780",
+        "inbound_nodes": []
+      },
+      {
+        "module": "synalinks.modules",
+        "class_name": "PythonSynthesis",
+        "config": {
+          "schema": {
+            "$defs": {
+              "Color": {
+                "description": "ARC-AGI color palette",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9
+                ],
+                "title": "Color",
+                "type": "integer"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Output from the ARC-AGI solver",
+            "properties": {
+              "output_grid": {
+                "description": "The output grid (list of integer list)",
+                "items": {
+                  "items": {
+                    "$ref": "#/$defs/Color"
+                  },
+                  "type": "array"
+                },
+                "title": "Output Grid",
+                "type": "array"
+              }
+            },
+            "required": [
+              "output_grid"
+            ],
+            "title": "ARCAGIOutput",
+            "type": "object"
+          },
+          "python_script": "\ndef transform(inputs):\n    # TODO implement the python function to transform the input grid into the output grid\n    return {\"output_grid\": inputs.get(\"input_grid\")}\n    \nresult = transform(inputs)\n",
+          "seed_scripts": [],
+          "default_return_value": {
+            "output_grid": [
+              []
+            ]
+          },
+          "name": "python_synthesis_780",
+          "description": "A code Python code transformation on JSON data.",
+          "trainable": true
+        },
+        "registered_name": null,
+        "name": "python_synthesis_780",
+        "inbound_nodes": [
+          {
+            "args": [
+              {
+                "class_name": "__symbolic_data_model__",
+                "config": {
+                  "schema": {
+                    "$defs": {
+                      "ARCAGITask": {
+                        "additionalProperties": false,
+                        "description": "Single transformation example",
+                        "properties": {
+                          "input_grid": {
+                            "description": "The input grid (list of integer list)",
+                            "items": {
+                              "items": {
+                                "$ref": "#/$defs/Color"
+                              },
+                              "type": "array"
+                            },
+                            "title": "Input Grid",
+                            "type": "array"
+                          },
+                          "output_grid": {
+                            "description": "The output grid (list of integer list)",
+                            "items": {
+                              "items": {
+                                "$ref": "#/$defs/Color"
+                              },
+                              "type": "array"
+                            },
+                            "title": "Output Grid",
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "input_grid",
+                          "output_grid"
+                        ],
+                        "title": "ARCAGITask",
+                        "type": "object"
+                      },
+                      "Color": {
+                        "description": "ARC-AGI color palette",
+                        "enum": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9
+                        ],
+                        "title": "Color",
+                        "type": "integer"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "Input for the ARC-AGI solver",
+                    "properties": {
+                      "examples": {
+                        "description": "A set of transformation examples",
+                        "items": {
+                          "$ref": "#/$defs/ARCAGITask"
+                        },
+                        "title": "Examples",
+                        "type": "array"
+                      },
+                      "input_grid": {
+                        "description": "The input grid (list of integer list)",
+                        "items": {
+                          "items": {
+                            "$ref": "#/$defs/Color"
+                          },
+                          "type": "array"
+                        },
+                        "title": "Input Grid",
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "examples",
+                      "input_grid"
+                    ],
+                    "title": "ARCAGIInput",
+                    "type": "object"
+                  },
+                  "synalinks_history": [
+                    "input_module_780",
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "kwargs": {
+              "training": false
+            }
+          }
+        ]
+      }
+    ],
+    "input_modules": [
+      [
+        "input_module_780",
+        0,
+        0
+      ]
+    ],
+    "output_modules": [
+      [
+        "python_synthesis_780",
+        0,
+        0
+      ]
+    ]
+  },
+  "registered_name": "Functional",
+  "compile_config": {
+    "optimizer": {
+      "module": "synalinks.optimizers",
+      "class_name": "OMEGA",
+      "config": {
+        "k_nearest_fitter": 5,
+        "mutation_temperature": 1.0,
+        "crossover_temperature": 1.0,
+        "few_shot_learning": false,
+        "nb_min_examples": 1,
+        "nb_max_examples": 3,
+        "sampling_temperature": 1.0,
+        "merging_rate": 0.02,
+        "population_size": 10,
+        "name": "omega_780",
+        "description": "OMEGA: OptiMizEr as Genetic Algorithm - A genetic optimizer with dominated novelty search.",
+        "language_model": {
+          "module": "synalinks",
+          "class_name": "LanguageModel",
+          "config": {
+            "model": "xai/grok-code-fast-1",
+            "api_base": null,
+            "timeout": 600,
+            "retry": 5,
+            "caching": false
+          },
+          "registered_name": null
+        },
+        "embedding_model": {
+          "module": "synalinks",
+          "class_name": "EmbeddingModel",
+          "config": {
+            "model": "ollama/mxbai-embed-large",
+            "api_base": "http://localhost:11434",
+            "retry": 5
+          },
+          "registered_name": null
+        }
+      },
+      "registered_name": null
+    },
+    "reward": {
+      "module": "synalinks.rewards",
+      "class_name": "RewardFunctionWrapper",
+      "config": {
+        "name": "reward_function_wrapper_780",
+        "reduction": "mean",
+        "in_mask": [
+          "output_grid"
+        ],
+        "out_mask": null,
+        "fn": {
+          "module": "builtins",
+          "class_name": "function",
+          "config": "Custom>grid_similarity",
+          "registered_name": "function"
+        }
+      },
+      "registered_name": null
+    },
+    "reward_weights": null,
+    "metrics": [
+      {
+        "module": "synalinks.metrics",
+        "class_name": "MeanMetricWrapper",
+        "config": {
+          "in_mask": [
+            "output_grid"
+          ],
+          "out_mask": null,
+          "name": "exact_match",
+          "fn": {
+            "module": "builtins",
+            "class_name": "function",
+            "config": "exact_match",
+            "registered_name": "function"
+          }
+        },
+        "registered_name": null
+      }
+    ],
+    "run_eagerly": false,
+    "steps_per_execution": 1
+  },
+  "variables": {
+    "trainable_variables": {
+      "python_synthesis_780": {
+        "state_python_synthesis_780": {
+          "examples": [],
+          "current_predictions": [],
+          "predictions": [
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        2,
+                        3,
+                        3,
+                        3,
+                        2
+                      ],
+                      [
+                        3,
+                        3,
+                        5,
+                        3,
+                        3
+                      ],
+                      [
+                        3,
+                        5,
+                        5,
+                        5,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        5,
+                        3,
+                        3
+                      ],
+                      [
+                        2,
+                        3,
+                        3,
+                        3,
+                        2
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        2,
+                        3,
+                        3,
+                        3,
+                        2,
+                        2,
+                        5,
+                        3,
+                        2,
+                        5
+                      ],
+                      [
+                        3,
+                        3,
+                        5,
+                        3,
+                        3,
+                        2,
+                        5,
+                        3,
+                        2,
+                        5
+                      ],
+                      [
+                        3,
+                        5,
+                        5,
+                        5,
+                        3,
+                        2,
+                        5,
+                        3,
+                        2,
+                        5
+                      ],
+                      [
+                        3,
+                        3,
+                        5,
+                        3,
+                        3,
+                        2,
+                        5,
+                        3,
+                        2,
+                        5
+                      ],
+                      [
+                        2,
+                        3,
+                        3,
+                        3,
+                        2,
+                        2,
+                        5,
+                        3,
+                        2,
+                        5
+                      ],
+                      [
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        5,
+                        5,
+                        3,
+                        2,
+                        5
+                      ],
+                      [
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        3,
+                        3,
+                        2,
+                        5
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        2,
+                        2,
+                        5
+                      ],
+                      [
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        5,
+                        5
+                      ],
+                      [
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        3
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    9,
+                    8,
+                    8,
+                    8,
+                    9
+                  ],
+                  [
+                    8,
+                    8,
+                    2,
+                    8,
+                    8
+                  ],
+                  [
+                    8,
+                    2,
+                    2,
+                    2,
+                    8
+                  ],
+                  [
+                    8,
+                    8,
+                    2,
+                    8,
+                    8
+                  ],
+                  [
+                    9,
+                    8,
+                    8,
+                    8,
+                    9
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    9,
+                    8,
+                    8,
+                    8,
+                    9
+                  ],
+                  [
+                    8,
+                    8,
+                    2,
+                    8,
+                    8
+                  ],
+                  [
+                    8,
+                    2,
+                    2,
+                    2,
+                    8
+                  ],
+                  [
+                    8,
+                    8,
+                    2,
+                    8,
+                    8
+                  ],
+                  [
+                    9,
+                    8,
+                    8,
+                    8,
+                    9
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 0.25
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        9,
+                        8,
+                        8,
+                        8,
+                        9
+                      ],
+                      [
+                        8,
+                        8,
+                        2,
+                        8,
+                        8
+                      ],
+                      [
+                        8,
+                        2,
+                        2,
+                        2,
+                        8
+                      ],
+                      [
+                        8,
+                        8,
+                        2,
+                        8,
+                        8
+                      ],
+                      [
+                        9,
+                        8,
+                        8,
+                        8,
+                        9
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        9,
+                        8,
+                        8,
+                        8,
+                        9,
+                        9,
+                        2,
+                        8,
+                        9,
+                        2
+                      ],
+                      [
+                        8,
+                        8,
+                        2,
+                        8,
+                        8,
+                        9,
+                        2,
+                        8,
+                        9,
+                        2
+                      ],
+                      [
+                        8,
+                        2,
+                        2,
+                        2,
+                        8,
+                        9,
+                        2,
+                        8,
+                        9,
+                        2
+                      ],
+                      [
+                        8,
+                        8,
+                        2,
+                        8,
+                        8,
+                        9,
+                        2,
+                        8,
+                        9,
+                        2
+                      ],
+                      [
+                        9,
+                        8,
+                        8,
+                        8,
+                        9,
+                        9,
+                        2,
+                        8,
+                        9,
+                        2
+                      ],
+                      [
+                        9,
+                        9,
+                        9,
+                        9,
+                        9,
+                        2,
+                        2,
+                        8,
+                        9,
+                        2
+                      ],
+                      [
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        8,
+                        8,
+                        9,
+                        2
+                      ],
+                      [
+                        8,
+                        8,
+                        8,
+                        8,
+                        8,
+                        8,
+                        8,
+                        9,
+                        9,
+                        2
+                      ],
+                      [
+                        9,
+                        9,
+                        9,
+                        9,
+                        9,
+                        9,
+                        9,
+                        9,
+                        2,
+                        2
+                      ],
+                      [
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        8
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    2,
+                    3,
+                    3,
+                    3,
+                    2
+                  ],
+                  [
+                    3,
+                    3,
+                    5,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    5,
+                    5,
+                    5,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    5,
+                    3,
+                    3
+                  ],
+                  [
+                    2,
+                    3,
+                    3,
+                    3,
+                    2
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    2,
+                    3,
+                    3,
+                    3,
+                    2
+                  ],
+                  [
+                    3,
+                    3,
+                    5,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    5,
+                    5,
+                    5,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    5,
+                    3,
+                    3
+                  ],
+                  [
+                    2,
+                    3,
+                    3,
+                    3,
+                    2
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 0.25
+            }
+          ],
+          "seed_candidates": [
+            {
+              "examples": [],
+              "python_script": "\ndef transform(inputs):\n    # TODO implement the python function to transform the input grid into the output grid\n    return {\"output_grid\": inputs.get(\"input_grid\")}\n    \nresult = transform(inputs)\n"
+            }
+          ],
+          "candidates": [
+            {
+              "python_script": "\ndef transform(inputs):\n    input_grid = inputs.get(\"input_grid\")\n    if not input_grid or len(input_grid) != 5 or any(len(row) != 5 for row in input_grid):\n        raise ValueError(\"Input grid must be 5x5\")\n    \n    # Collect unique colors and sort them\n    colors = sorted(set(val for row in input_grid for val in row))\n    if len(colors) != 3:\n        raise ValueError(\"Input must have exactly 3 unique colors\")\n    min_c, mid_c, max_c = colors\n    \n    # Define sequences\n    top_right_seq = [min_c, max_c, mid_c, min_c, max_c]\n    bottom_left_seq = [min_c, max_c, mid_c, min_c, max_c]\n    bottom_right_seqs = [\n        [max_c, max_c, mid_c, min_c, max_c],\n        [max_c, mid_c, mid_c, min_c, max_c],\n        [mid_c, mid_c, min_c, min_c, max_c],\n        [min_c, min_c, min_c, max_c, max_c],\n        [max_c, max_c, max_c, max_c, mid_c]\n    ]\n    \n    # Initialize 10x10 output grid\n    output = [[0] * 10 for _ in range(10)]\n    \n    # Fill top-left 5x5\n    for i in range(5):\n        for j in range(5):\n            output[i][j] = input_grid[i][j]\n    \n    # Fill top-right 5x5\n    for i in range(5):\n        for j in range(5):\n            output[i][j + 5] = top_right_seq[j]\n    \n    # Fill bottom-left 5x5\n    for i in range(5):\n        for j in range(5):\n            output[i + 5][j] = bottom_left_seq[i]\n    \n    # Fill bottom-right 5x5\n    for i in range(5):\n        for j in range(5):\n            output[i + 5][j + 5] = bottom_right_seqs[i][j]\n    \n    return {\"output_grid\": output}\n",
+              "examples": [],
+              "reward": 0.0
+            },
+            {
+              "python_script": "\ndef transform(inputs):\n    input_grid = inputs['input_grid']\n    if len(input_grid) != 5 or len(input_grid[0]) != 5:\n        return {\"output_grid\": input_grid}  # fallback for invalid input\n    \n    corner = input_grid[0][0]\n    center = input_grid[2][2]\n    border = input_grid[0][1]\n    \n    output = [[0] * 10 for _ in range(10)]\n    \n    # top-left 5x5: original\n    for i in range(5):\n        for j in range(5):\n            output[i][j] = input_grid[i][j]\n    \n    # top-right 5x5: repeat sequence [corner, center, border, corner, center]\n    top_right = [corner, center, border, corner, center]\n    for i in range(5):\n        for j in range(5):\n            output[i][5 + j] = top_right[j]\n    \n    # bottom-left: rows 5-9, uniform colors [corner, center, border, corner, center]\n    bottom_left_colors = [corner, center, border, corner, center]\n    for i in range(5):\n        color = bottom_left_colors[i]\n        for j in range(5):\n            output[5 + i][j] = color\n    \n    # bottom-right: specific patterns per row\n    patterns = [\n        [center, center, border, corner, center],  # row 5\n        [center, border, border, corner, center],  # row 6\n        [border, border, corner, corner, center],  # row 7\n        [corner, corner, corner, center, center],  # row 8\n        [center, center, center, center, border],  # row 9\n    ]\n    for i in range(5):\n        for j in range(5):\n            output[5 + i][5 + j] = patterns[i][j]\n    \n    return {\"output_grid\": output}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 1.0
+            }
+          ],
+          "best_candidates": [
+            {
+              "python_script": "\ndef transform(inputs):\n    input_grid = inputs['input_grid']\n    if len(input_grid) != 5 or len(input_grid[0]) != 5:\n        return {\"output_grid\": input_grid}  # fallback for invalid input\n    \n    corner = input_grid[0][0]\n    center = input_grid[2][2]\n    border = input_grid[0][1]\n    \n    output = [[0] * 10 for _ in range(10)]\n    \n    # top-left 5x5: original\n    for i in range(5):\n        for j in range(5):\n            output[i][j] = input_grid[i][j]\n    \n    # top-right 5x5: repeat sequence [corner, center, border, corner, center]\n    top_right = [corner, center, border, corner, center]\n    for i in range(5):\n        for j in range(5):\n            output[i][5 + j] = top_right[j]\n    \n    # bottom-left: rows 5-9, uniform colors [corner, center, border, corner, center]\n    bottom_left_colors = [corner, center, border, corner, center]\n    for i in range(5):\n        color = bottom_left_colors[i]\n        for j in range(5):\n            output[5 + i][j] = color\n    \n    # bottom-right: specific patterns per row\n    patterns = [\n        [center, center, border, corner, center],  # row 5\n        [center, border, border, corner, center],  # row 6\n        [border, border, corner, corner, center],  # row 7\n        [corner, corner, corner, center, center],  # row 8\n        [center, center, center, center, border],  # row 9\n    ]\n    for i in range(5):\n        for j in range(5):\n            output[5 + i][5 + j] = patterns[i][j]\n    \n    return {\"output_grid\": output}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 1.0
+            }
+          ],
+          "history": [],
+          "nb_visit": 1,
+          "cumulative_reward": 0.25,
+          "python_script": "\ndef transform(inputs):\n    input_grid = inputs['input_grid']\n    if len(input_grid) != 5 or len(input_grid[0]) != 5:\n        return {\"output_grid\": input_grid}  # fallback for invalid input\n    \n    corner = input_grid[0][0]\n    center = input_grid[2][2]\n    border = input_grid[0][1]\n    \n    output = [[0] * 10 for _ in range(10)]\n    \n    # top-left 5x5: original\n    for i in range(5):\n        for j in range(5):\n            output[i][j] = input_grid[i][j]\n    \n    # top-right 5x5: repeat sequence [corner, center, border, corner, center]\n    top_right = [corner, center, border, corner, center]\n    for i in range(5):\n        for j in range(5):\n            output[i][5 + j] = top_right[j]\n    \n    # bottom-left: rows 5-9, uniform colors [corner, center, border, corner, center]\n    bottom_left_colors = [corner, center, border, corner, center]\n    for i in range(5):\n        color = bottom_left_colors[i]\n        for j in range(5):\n            output[5 + i][j] = color\n    \n    # bottom-right: specific patterns per row\n    patterns = [\n        [center, center, border, corner, center],  # row 5\n        [center, border, border, corner, center],  # row 6\n        [border, border, corner, corner, center],  # row 7\n        [corner, corner, corner, center, center],  # row 8\n        [center, center, center, center, border],  # row 9\n    ]\n    for i in range(5):\n        for j in range(5):\n            output[5 + i][5 + j] = patterns[i][j]\n    \n    return {\"output_grid\": output}\n\nresult = transform(inputs)\n"
+        }
+      }
+    },
+    "non_trainable_variables": {},
+    "optimizer_trainable_variables": {},
+    "optimizer_non_trainable_variables": {
+      "omega_780": {
+        "iterations_omega_780": {
+          "iterations": 0,
+          "epochs": 0
+        }
+      }
+    },
+    "metrics_variables": {
+      "reward": {
+        "total_with_count": {
+          "total": 0.0,
+          "count": 0
+        }
+      }
+    }
+  }
+}

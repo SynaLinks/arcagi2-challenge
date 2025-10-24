@@ -1,0 +1,3221 @@
+{
+  "module": "synalinks.src.programs.functional",
+  "class_name": "Functional",
+  "config": {
+    "name": "arcagi_task_22425bda",
+    "trainable": true,
+    "modules": [
+      {
+        "module": "synalinks.modules",
+        "class_name": "InputModule",
+        "config": {
+          "schema": {
+            "$defs": {
+              "ARCAGITask": {
+                "additionalProperties": false,
+                "description": "Single transformation example",
+                "properties": {
+                  "input_grid": {
+                    "description": "The input grid (list of integer list)",
+                    "items": {
+                      "items": {
+                        "$ref": "#/$defs/Color"
+                      },
+                      "type": "array"
+                    },
+                    "title": "Input Grid",
+                    "type": "array"
+                  },
+                  "output_grid": {
+                    "description": "The output grid (list of integer list)",
+                    "items": {
+                      "items": {
+                        "$ref": "#/$defs/Color"
+                      },
+                      "type": "array"
+                    },
+                    "title": "Output Grid",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "input_grid",
+                  "output_grid"
+                ],
+                "title": "ARCAGITask",
+                "type": "object"
+              },
+              "Color": {
+                "description": "ARC-AGI color palette",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9
+                ],
+                "title": "Color",
+                "type": "integer"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Input for the ARC-AGI solver",
+            "properties": {
+              "examples": {
+                "description": "A set of transformation examples",
+                "items": {
+                  "$ref": "#/$defs/ARCAGITask"
+                },
+                "title": "Examples",
+                "type": "array"
+              },
+              "input_grid": {
+                "description": "The input grid (list of integer list)",
+                "items": {
+                  "items": {
+                    "$ref": "#/$defs/Color"
+                  },
+                  "type": "array"
+                },
+                "title": "Input Grid",
+                "type": "array"
+              }
+            },
+            "required": [
+              "examples",
+              "input_grid"
+            ],
+            "title": "ARCAGIInput",
+            "type": "object"
+          },
+          "optional": false,
+          "name": "input_module_845",
+          "description": "Defines the input data model for a program."
+        },
+        "registered_name": null,
+        "name": "input_module_845",
+        "inbound_nodes": []
+      },
+      {
+        "module": "synalinks.modules",
+        "class_name": "PythonSynthesis",
+        "config": {
+          "schema": {
+            "$defs": {
+              "Color": {
+                "description": "ARC-AGI color palette",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9
+                ],
+                "title": "Color",
+                "type": "integer"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Output from the ARC-AGI solver",
+            "properties": {
+              "output_grid": {
+                "description": "The output grid (list of integer list)",
+                "items": {
+                  "items": {
+                    "$ref": "#/$defs/Color"
+                  },
+                  "type": "array"
+                },
+                "title": "Output Grid",
+                "type": "array"
+              }
+            },
+            "required": [
+              "output_grid"
+            ],
+            "title": "ARCAGIOutput",
+            "type": "object"
+          },
+          "python_script": "\ndef transform(inputs):\n    # TODO implement the python function to transform the input grid into the output grid\n    return {\"output_grid\": inputs.get(\"input_grid\")}\n    \nresult = transform(inputs)\n",
+          "seed_scripts": [],
+          "default_return_value": {
+            "output_grid": [
+              []
+            ]
+          },
+          "name": "python_synthesis_845",
+          "description": "A code Python code transformation on JSON data.",
+          "trainable": true
+        },
+        "registered_name": null,
+        "name": "python_synthesis_845",
+        "inbound_nodes": [
+          {
+            "args": [
+              {
+                "class_name": "__symbolic_data_model__",
+                "config": {
+                  "schema": {
+                    "$defs": {
+                      "ARCAGITask": {
+                        "additionalProperties": false,
+                        "description": "Single transformation example",
+                        "properties": {
+                          "input_grid": {
+                            "description": "The input grid (list of integer list)",
+                            "items": {
+                              "items": {
+                                "$ref": "#/$defs/Color"
+                              },
+                              "type": "array"
+                            },
+                            "title": "Input Grid",
+                            "type": "array"
+                          },
+                          "output_grid": {
+                            "description": "The output grid (list of integer list)",
+                            "items": {
+                              "items": {
+                                "$ref": "#/$defs/Color"
+                              },
+                              "type": "array"
+                            },
+                            "title": "Output Grid",
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "input_grid",
+                          "output_grid"
+                        ],
+                        "title": "ARCAGITask",
+                        "type": "object"
+                      },
+                      "Color": {
+                        "description": "ARC-AGI color palette",
+                        "enum": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9
+                        ],
+                        "title": "Color",
+                        "type": "integer"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "Input for the ARC-AGI solver",
+                    "properties": {
+                      "examples": {
+                        "description": "A set of transformation examples",
+                        "items": {
+                          "$ref": "#/$defs/ARCAGITask"
+                        },
+                        "title": "Examples",
+                        "type": "array"
+                      },
+                      "input_grid": {
+                        "description": "The input grid (list of integer list)",
+                        "items": {
+                          "items": {
+                            "$ref": "#/$defs/Color"
+                          },
+                          "type": "array"
+                        },
+                        "title": "Input Grid",
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "examples",
+                      "input_grid"
+                    ],
+                    "title": "ARCAGIInput",
+                    "type": "object"
+                  },
+                  "synalinks_history": [
+                    "input_module_845",
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "kwargs": {
+              "training": false
+            }
+          }
+        ]
+      }
+    ],
+    "input_modules": [
+      [
+        "input_module_845",
+        0,
+        0
+      ]
+    ],
+    "output_modules": [
+      [
+        "python_synthesis_845",
+        0,
+        0
+      ]
+    ]
+  },
+  "registered_name": "Functional",
+  "compile_config": {
+    "optimizer": {
+      "module": "synalinks.optimizers",
+      "class_name": "OMEGA",
+      "config": {
+        "k_nearest_fitter": 5,
+        "mutation_temperature": 1.0,
+        "crossover_temperature": 1.0,
+        "few_shot_learning": false,
+        "nb_min_examples": 1,
+        "nb_max_examples": 3,
+        "sampling_temperature": 1.0,
+        "merging_rate": 0.02,
+        "population_size": 10,
+        "name": "omega_845",
+        "description": "OMEGA: OptiMizEr as Genetic Algorithm - A genetic optimizer with dominated novelty search.",
+        "language_model": {
+          "module": "synalinks",
+          "class_name": "LanguageModel",
+          "config": {
+            "model": "xai/grok-code-fast-1",
+            "api_base": null,
+            "timeout": 600,
+            "retry": 5,
+            "caching": false
+          },
+          "registered_name": null
+        },
+        "embedding_model": {
+          "module": "synalinks",
+          "class_name": "EmbeddingModel",
+          "config": {
+            "model": "ollama/mxbai-embed-large",
+            "api_base": "http://localhost:11434",
+            "retry": 5
+          },
+          "registered_name": null
+        }
+      },
+      "registered_name": null
+    },
+    "reward": {
+      "module": "synalinks.rewards",
+      "class_name": "RewardFunctionWrapper",
+      "config": {
+        "name": "reward_function_wrapper_845",
+        "reduction": "mean",
+        "in_mask": [
+          "output_grid"
+        ],
+        "out_mask": null,
+        "fn": {
+          "module": "builtins",
+          "class_name": "function",
+          "config": "Custom>grid_similarity",
+          "registered_name": "function"
+        }
+      },
+      "registered_name": null
+    },
+    "reward_weights": null,
+    "metrics": [
+      {
+        "module": "synalinks.metrics",
+        "class_name": "MeanMetricWrapper",
+        "config": {
+          "in_mask": [
+            "output_grid"
+          ],
+          "out_mask": null,
+          "name": "exact_match",
+          "fn": {
+            "module": "builtins",
+            "class_name": "function",
+            "config": "exact_match",
+            "registered_name": "function"
+          }
+        },
+        "registered_name": null
+      }
+    ],
+    "run_eagerly": false,
+    "steps_per_execution": 1
+  },
+  "variables": {
+    "trainable_variables": {
+      "python_synthesis_845": {
+        "state_python_synthesis_845": {
+          "examples": [],
+          "current_predictions": [],
+          "predictions": [
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        9,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        9,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        9,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        9,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        0,
+                        0,
+                        0,
+                        0,
+                        9,
+                        0,
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        9,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        9,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        9,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        9,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        9
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        0,
+                        8,
+                        9
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        7,
+                        1,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        1,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        1,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        1,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        1,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        2,
+                        5,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        1,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        1,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        1,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        1
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        3,
+                        2,
+                        1,
+                        5
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        5,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        1,
+                        9,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        4,
+                        1,
+                        9,
+                        3,
+                        5
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    7,
+                    7,
+                    7,
+                    2,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    2,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    2,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    5,
+                    5,
+                    5,
+                    5,
+                    5,
+                    5,
+                    5
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    2,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    2,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    2,
+                    7,
+                    7,
+                    7
+                  ]
+                ]
+              },
+              "outputs": {
+                "stdout": "",
+                "stderr": "Error: 0\nTraceback (most recent call last):\n  File \"/home/yoan/NewWorkspace/arcagi2-challenge/.venv/lib/python3.10/site-packages/synalinks/src/modules/synthesis/python_synthesis.py\", line 63, in _execute_script_in_process\n    exec(python_script, local_namespace)\n  File \"<string>\", line 5, in <module>\n  File \"<string>\", line 5, in <listcomp>\nKeyError: 0\n"
+              },
+              "reward": 0.0
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        5
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        2,
+                        5
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        7,
+                        1,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        1,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        1,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        1,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        1,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        2,
+                        5,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        1,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        1,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        1,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        1
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        3,
+                        2,
+                        1,
+                        5
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        5,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        1,
+                        9,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        4,
+                        1,
+                        9,
+                        3,
+                        5
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    9,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    8,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    9,
+                    7,
+                    7,
+                    7,
+                    7,
+                    8,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    9,
+                    7,
+                    7,
+                    7,
+                    8,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    9,
+                    7,
+                    7,
+                    8,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    0,
+                    0,
+                    0,
+                    0,
+                    9,
+                    0,
+                    8,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    9,
+                    8,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    9,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    8,
+                    9,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    8,
+                    7,
+                    9,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    8,
+                    7,
+                    7,
+                    9
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    0,
+                    8,
+                    9
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 1.0
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        5
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        2,
+                        5
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        9,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        9,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        9,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        9,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        0,
+                        0,
+                        0,
+                        0,
+                        9,
+                        0,
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        9,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        9,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        9,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        9,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        9
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        0,
+                        8,
+                        9
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        5,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        1,
+                        9,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        9,
+                        7,
+                        4,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        4,
+                        1,
+                        9,
+                        3,
+                        5
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    7,
+                    1,
+                    7,
+                    7,
+                    3,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    1,
+                    7,
+                    3,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    1,
+                    3,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    1,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    3,
+                    1,
+                    7,
+                    7,
+                    5,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    2,
+                    5,
+                    2,
+                    2,
+                    2
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    3,
+                    7,
+                    7,
+                    1,
+                    5,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    3,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    3,
+                    7,
+                    7,
+                    7,
+                    5,
+                    1,
+                    7,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    3,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    1,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    3,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    7,
+                    1
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    3,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    7,
+                    7
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    1,
+                    2,
+                    3,
+                    5
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 0.5
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        5,
+                        5
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        2,
+                        7,
+                        7,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        2,
+                        5
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        9,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        9,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        9,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        9,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        0,
+                        0,
+                        0,
+                        0,
+                        9,
+                        0,
+                        8,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        9,
+                        8,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        9,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        9,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        9,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        7,
+                        8,
+                        7,
+                        7,
+                        9
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        0,
+                        8,
+                        9
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        7,
+                        1,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        1,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        1,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        1,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        1,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        2,
+                        1,
+                        2,
+                        5,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        1,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        1,
+                        7,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        1,
+                        7
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        1
+                      ],
+                      [
+                        7,
+                        7,
+                        7,
+                        7,
+                        3,
+                        7,
+                        7,
+                        7,
+                        5,
+                        7,
+                        7,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        3,
+                        2,
+                        1,
+                        5
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    5,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    5,
+                    1,
+                    9,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    7,
+                    5,
+                    7,
+                    9,
+                    7,
+                    4,
+                    7
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    3,
+                    1,
+                    5,
+                    4,
+                    9
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 0.20000000298023224
+            }
+          ],
+          "seed_candidates": [
+            {
+              "examples": [],
+              "python_script": "\ndef transform(inputs):\n    # TODO implement the python function to transform the input grid into the output grid\n    return {\"output_grid\": inputs.get(\"input_grid\")}\n    \nresult = transform(inputs)\n"
+            }
+          ],
+          "candidates": [
+            {
+              "python_script": "grid = inputs['input_grid']\nsize = len(grid)\n# Identify full columns (vertical stripes)\nfull_cols = []\nfor c in range(size):\n    col = [grid[r][c] for r in range(size)]\n    val = col[0]\n    if val != 7 and sum(1 for x in col if x == val) > size // 2:\n        full_cols.append((c, val))\n# Identify full rows (horizontal stripes)\nfull_rows = []\nfor r in range(size):\n    row = grid[r]\n    val = row[0]\n    if val != 7 and sum(1 for x in row if x == val) > size // 2:\n        full_rows.append((r, val))\n# Identify full diagonal (diagonal stripe)\ndiag = [grid[i][i] for i in range(size)]\nval = diag[0] if diag else 7\nfull_diags = []\nif val != 7 and sum(1 for x in diag if x == val) > size // 2:\n    full_diags.append((0, val))\n# Sort columns by index descending\nfull_cols.sort(key=lambda x: x[0], reverse=True)\n# Sort rows by index descending\nfull_rows.sort(key=lambda x: x[0], reverse=True)\nif full_diags:\n    # Order: horizontal, vertical, diagonal\n    result = [val for _, val in full_rows] + [val for _, val in full_cols] + [val for _, val in full_diags]\nelse:\n    # Alternate vertical and horizontal\n    result = []\n    max_len = max(len(full_cols), len(full_rows))\n    for i in range(max_len):\n        if i < len(full_cols):\n            result.append(full_cols[i][1])\n        if i < len(full_rows):\n            result.append(full_rows[i][1])\nresult = {\"output_grid\": [result]}",
+              "examples": [],
+              "reward": 0.0
+            },
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs.get(\"input_grid\")\n    unique_colors = set()\n    for row in grid:\n        for cell in row:\n            if cell != 7:\n                unique_colors.add(cell)\n    result = sorted(unique_colors, reverse=True)\n    return {\"output_grid\": [result]}\n\nresult = transform(inputs)",
+              "examples": [],
+              "reward": 0.1666666716337204
+            },
+            {
+              "python_script": "grid = inputs['input_grid']\ncolors = set()\nfor row in grid:\n    for cell in row:\n        if cell != 7:\n            colors.add(cell)\nresult = {\"output_grid\": [sorted(colors, key=lambda x: {'4':0, '1':1, '9':2, '3':3, '5':4}.get(str(x), 5))]}",
+              "examples": [],
+              "reward": 0.0
+            }
+          ],
+          "best_candidates": [
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs.get(\"input_grid\")\n    unique_colors = set()\n    for row in grid:\n        for cell in row:\n            if cell != 7:\n                unique_colors.add(cell)\n    result = sorted(unique_colors, reverse=True)\n    return {\"output_grid\": [result]}\n\nresult = transform(inputs)",
+              "examples": [],
+              "reward": 0.1666666716337204
+            },
+            {
+              "python_script": "grid = inputs['input_grid']\nsize = len(grid)\n# Identify full columns (vertical stripes)\nfull_cols = []\nfor c in range(size):\n    col = [grid[r][c] for r in range(size)]\n    val = col[0]\n    if val != 7 and sum(1 for x in col if x == val) > size // 2:\n        full_cols.append((c, val))\n# Identify full rows (horizontal stripes)\nfull_rows = []\nfor r in range(size):\n    row = grid[r]\n    val = row[0]\n    if val != 7 and sum(1 for x in row if x == val) > size // 2:\n        full_rows.append((r, val))\n# Identify full diagonal (diagonal stripe)\ndiag = [grid[i][i] for i in range(size)]\nval = diag[0] if diag else 7\nfull_diags = []\nif val != 7 and sum(1 for x in diag if x == val) > size // 2:\n    full_diags.append((0, val))\n# Sort columns by index descending\nfull_cols.sort(key=lambda x: x[0], reverse=True)\n# Sort rows by index descending\nfull_rows.sort(key=lambda x: x[0], reverse=True)\nif full_diags:\n    # Order: horizontal, vertical, diagonal\n    result = [val for _, val in full_rows] + [val for _, val in full_cols] + [val for _, val in full_diags]\nelse:\n    # Alternate vertical and horizontal\n    result = []\n    max_len = max(len(full_cols), len(full_rows))\n    for i in range(max_len):\n        if i < len(full_cols):\n            result.append(full_cols[i][1])\n        if i < len(full_rows):\n            result.append(full_rows[i][1])\nresult = {\"output_grid\": [result]}",
+              "examples": [],
+              "reward": 0.0
+            },
+            {
+              "python_script": "grid = inputs['input_grid']\ncolors = set()\nfor row in grid:\n    for cell in row:\n        if cell != 7:\n            colors.add(cell)\nresult = {\"output_grid\": [sorted(colors, key=lambda x: {'4':0, '1':1, '9':2, '3':3, '5':4}.get(str(x), 5))]}",
+              "examples": [],
+              "reward": 0.0
+            },
+            {
+              "python_script": "seen = set()\nresult = []\nfor row in inputs['input_grid']:\n    for cell in row:\n        if cell != 7 and cell not in seen:\n            seen.add(cell)\n            result.append(cell)",
+              "examples": [],
+              "reward": 0.0
+            },
+            {
+              "python_script": "size = len(inputs)\n# Identify full columns (vertical stripes)\nfull_cols = []\nfor c in range(size):\n    col = [inputs[r][c] for r in range(size)]\n    val = col[0]\n    if val != 7 and sum(1 for x in col if x == val) > size // 2:\n        full_cols.append((c, val))\n# Identify full rows (horizontal stripes)\nfull_rows = []\nfor r in range(size):\n    row = inputs[r]\n    val = row[0]\n    if val != 7 and sum(1 for x in row if x == val) > size // 2:\n        full_rows.append((r, val))\n# Identify full diagonal (diagonal stripe)\ndiag = [inputs[i][i] for i in range(size)]\nval = diag[0] if diag else 7\nfull_diags = []\nif val != 7 and sum(1 for x in diag if x == val) > size // 2:\n    full_diags.append((0, val))\n# Sort columns by index descending\nfull_cols.sort(key=lambda x: x[0], reverse=True)\n# Sort rows by index descending\nfull_rows.sort(key=lambda x: x[0], reverse=True)\nif full_diags:\n    # Order: horizontal, vertical, diagonal\n    result = [val for _, val in full_rows] + [val for _, val in full_cols] + [val for _, val in full_diags]\nelse:\n    # Alternate vertical and horizontal\n    result = []\n    max_len = max(len(full_cols), len(full_rows))\n    for i in range(max_len):\n        if i < len(full_cols):\n            result.append(full_cols[i][1])\n        if i < len(full_rows):\n            result.append(full_rows[i][1])\nresult = {\"output_grid\": [result]}",
+              "examples": [],
+              "reward": 0.0
+            }
+          ],
+          "history": [],
+          "nb_visit": 1,
+          "cumulative_reward": 0.20000000298023224,
+          "python_script": "def transform(inputs):\n    grid = inputs.get(\"input_grid\")\n    unique_colors = set()\n    for row in grid:\n        for cell in row:\n            if cell != 7:\n                unique_colors.add(cell)\n    result = sorted(unique_colors, reverse=True)\n    return {\"output_grid\": [result]}\n\nresult = transform(inputs)"
+        }
+      }
+    },
+    "non_trainable_variables": {},
+    "optimizer_trainable_variables": {},
+    "optimizer_non_trainable_variables": {
+      "omega_845": {
+        "iterations_omega_845": {
+          "iterations": 0,
+          "epochs": 0
+        }
+      }
+    },
+    "metrics_variables": {
+      "reward": {
+        "total_with_count": {
+          "total": 0.0,
+          "count": 0
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,4186 @@
+{
+  "module": "synalinks.src.programs.functional",
+  "class_name": "Functional",
+  "config": {
+    "name": "arcagi_task_bbb1b8b6",
+    "trainable": true,
+    "modules": [
+      {
+        "module": "synalinks.modules",
+        "class_name": "InputModule",
+        "config": {
+          "schema": {
+            "$defs": {
+              "ARCAGITask": {
+                "additionalProperties": false,
+                "description": "Single transformation example",
+                "properties": {
+                  "input_grid": {
+                    "description": "The input grid (list of integer list)",
+                    "items": {
+                      "items": {
+                        "$ref": "#/$defs/Color"
+                      },
+                      "type": "array"
+                    },
+                    "title": "Input Grid",
+                    "type": "array"
+                  },
+                  "output_grid": {
+                    "description": "The output grid (list of integer list)",
+                    "items": {
+                      "items": {
+                        "$ref": "#/$defs/Color"
+                      },
+                      "type": "array"
+                    },
+                    "title": "Output Grid",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "input_grid",
+                  "output_grid"
+                ],
+                "title": "ARCAGITask",
+                "type": "object"
+              },
+              "Color": {
+                "description": "ARC-AGI color palette",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9
+                ],
+                "title": "Color",
+                "type": "integer"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Input for the ARC-AGI solver",
+            "properties": {
+              "examples": {
+                "description": "A set of transformation examples",
+                "items": {
+                  "$ref": "#/$defs/ARCAGITask"
+                },
+                "title": "Examples",
+                "type": "array"
+              },
+              "input_grid": {
+                "description": "The input grid (list of integer list)",
+                "items": {
+                  "items": {
+                    "$ref": "#/$defs/Color"
+                  },
+                  "type": "array"
+                },
+                "title": "Input Grid",
+                "type": "array"
+              }
+            },
+            "required": [
+              "examples",
+              "input_grid"
+            ],
+            "title": "ARCAGIInput",
+            "type": "object"
+          },
+          "optional": false,
+          "name": "input_module_571",
+          "description": "Defines the input data model for a program."
+        },
+        "registered_name": null,
+        "name": "input_module_571",
+        "inbound_nodes": []
+      },
+      {
+        "module": "synalinks.modules",
+        "class_name": "PythonSynthesis",
+        "config": {
+          "schema": {
+            "$defs": {
+              "Color": {
+                "description": "ARC-AGI color palette",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9
+                ],
+                "title": "Color",
+                "type": "integer"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Output from the ARC-AGI solver",
+            "properties": {
+              "output_grid": {
+                "description": "The output grid (list of integer list)",
+                "items": {
+                  "items": {
+                    "$ref": "#/$defs/Color"
+                  },
+                  "type": "array"
+                },
+                "title": "Output Grid",
+                "type": "array"
+              }
+            },
+            "required": [
+              "output_grid"
+            ],
+            "title": "ARCAGIOutput",
+            "type": "object"
+          },
+          "python_script": "\ndef transform(inputs):\n    # TODO implement the python function to transform the input grid into the output grid\n    return {\"output_grid\": inputs.get(\"input_grid\")}\n    \nresult = transform(inputs)\n",
+          "seed_scripts": [],
+          "default_return_value": {
+            "output_grid": [
+              []
+            ]
+          },
+          "name": "python_synthesis_571",
+          "description": "A code Python code transformation on JSON data.",
+          "trainable": true
+        },
+        "registered_name": null,
+        "name": "python_synthesis_571",
+        "inbound_nodes": [
+          {
+            "args": [
+              {
+                "class_name": "__symbolic_data_model__",
+                "config": {
+                  "schema": {
+                    "$defs": {
+                      "ARCAGITask": {
+                        "additionalProperties": false,
+                        "description": "Single transformation example",
+                        "properties": {
+                          "input_grid": {
+                            "description": "The input grid (list of integer list)",
+                            "items": {
+                              "items": {
+                                "$ref": "#/$defs/Color"
+                              },
+                              "type": "array"
+                            },
+                            "title": "Input Grid",
+                            "type": "array"
+                          },
+                          "output_grid": {
+                            "description": "The output grid (list of integer list)",
+                            "items": {
+                              "items": {
+                                "$ref": "#/$defs/Color"
+                              },
+                              "type": "array"
+                            },
+                            "title": "Output Grid",
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "input_grid",
+                          "output_grid"
+                        ],
+                        "title": "ARCAGITask",
+                        "type": "object"
+                      },
+                      "Color": {
+                        "description": "ARC-AGI color palette",
+                        "enum": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9
+                        ],
+                        "title": "Color",
+                        "type": "integer"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "Input for the ARC-AGI solver",
+                    "properties": {
+                      "examples": {
+                        "description": "A set of transformation examples",
+                        "items": {
+                          "$ref": "#/$defs/ARCAGITask"
+                        },
+                        "title": "Examples",
+                        "type": "array"
+                      },
+                      "input_grid": {
+                        "description": "The input grid (list of integer list)",
+                        "items": {
+                          "items": {
+                            "$ref": "#/$defs/Color"
+                          },
+                          "type": "array"
+                        },
+                        "title": "Input Grid",
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "examples",
+                      "input_grid"
+                    ],
+                    "title": "ARCAGIInput",
+                    "type": "object"
+                  },
+                  "synalinks_history": [
+                    "input_module_571",
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "kwargs": {
+              "training": false
+            }
+          }
+        ]
+      }
+    ],
+    "input_modules": [
+      [
+        "input_module_571",
+        0,
+        0
+      ]
+    ],
+    "output_modules": [
+      [
+        "python_synthesis_571",
+        0,
+        0
+      ]
+    ]
+  },
+  "registered_name": "Functional",
+  "compile_config": {
+    "optimizer": {
+      "module": "synalinks.optimizers",
+      "class_name": "OMEGA",
+      "config": {
+        "k_nearest_fitter": 5,
+        "mutation_temperature": 1.0,
+        "crossover_temperature": 1.0,
+        "few_shot_learning": false,
+        "nb_min_examples": 1,
+        "nb_max_examples": 3,
+        "sampling_temperature": 1.0,
+        "merging_rate": 0.02,
+        "population_size": 10,
+        "name": "omega_571",
+        "description": "OMEGA: OptiMizEr as Genetic Algorithm - A genetic optimizer with dominated novelty search.",
+        "language_model": {
+          "module": "synalinks",
+          "class_name": "LanguageModel",
+          "config": {
+            "model": "xai/grok-code-fast-1",
+            "api_base": null,
+            "timeout": 600,
+            "retry": 5,
+            "caching": false
+          },
+          "registered_name": null
+        },
+        "embedding_model": {
+          "module": "synalinks",
+          "class_name": "EmbeddingModel",
+          "config": {
+            "model": "ollama/mxbai-embed-large",
+            "api_base": "http://localhost:11434",
+            "retry": 5
+          },
+          "registered_name": null
+        }
+      },
+      "registered_name": null
+    },
+    "reward": {
+      "module": "synalinks.rewards",
+      "class_name": "RewardFunctionWrapper",
+      "config": {
+        "name": "reward_function_wrapper_571",
+        "reduction": "mean",
+        "in_mask": [
+          "output_grid"
+        ],
+        "out_mask": null,
+        "fn": {
+          "module": "builtins",
+          "class_name": "function",
+          "config": "Custom>grid_similarity",
+          "registered_name": "function"
+        }
+      },
+      "registered_name": null
+    },
+    "reward_weights": null,
+    "metrics": [
+      {
+        "module": "synalinks.metrics",
+        "class_name": "MeanMetricWrapper",
+        "config": {
+          "in_mask": [
+            "output_grid"
+          ],
+          "out_mask": null,
+          "name": "exact_match",
+          "fn": {
+            "module": "builtins",
+            "class_name": "function",
+            "config": "exact_match",
+            "registered_name": "function"
+          }
+        },
+        "registered_name": null
+      }
+    ],
+    "run_eagerly": false,
+    "steps_per_execution": 1
+  },
+  "variables": {
+    "trainable_variables": {
+      "python_synthesis_571": {
+        "state_python_synthesis_571": {
+          "examples": [],
+          "current_predictions": [],
+          "predictions": [
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        3,
+                        3
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        3,
+                        3,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        3,
+                        3,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        3,
+                        3
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        3,
+                        3
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        3,
+                        3
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        6,
+                        6,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        6,
+                        6,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        6,
+                        6,
+                        1
+                      ],
+                      [
+                        1,
+                        6,
+                        6,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        3,
+                        3,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        3,
+                        3,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        3,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        0,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        1,
+                        0,
+                        1,
+                        1,
+                        5,
+                        0,
+                        7,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        1,
+                        0,
+                        5,
+                        0,
+                        7,
+                        0,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        1,
+                        7,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        7,
+                        1,
+                        7
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    5,
+                    2,
+                    2,
+                    2,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    0,
+                    5,
+                    0,
+                    2,
+                    2,
+                    2
+                  ],
+                  [
+                    1,
+                    1,
+                    0,
+                    0,
+                    5,
+                    0,
+                    0,
+                    2,
+                    2
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    0,
+                    5,
+                    0,
+                    0,
+                    0,
+                    2
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    0
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 0.4375
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        2,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0,
+                        5,
+                        0,
+                        0,
+                        0,
+                        2
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        2,
+                        2,
+                        2,
+                        1
+                      ],
+                      [
+                        1,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        2
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        3,
+                        3
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        3,
+                        3,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        3,
+                        3,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        3,
+                        3
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        3,
+                        3
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        3,
+                        3
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        6,
+                        6,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        6,
+                        6,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        6,
+                        6,
+                        1
+                      ],
+                      [
+                        1,
+                        6,
+                        6,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        3,
+                        3,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        3,
+                        3,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        3,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        0,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        1,
+                        0,
+                        1,
+                        1,
+                        5,
+                        0,
+                        7,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        1,
+                        0,
+                        5,
+                        0,
+                        7,
+                        0,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        1,
+                        7,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        7,
+                        1,
+                        7
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    0,
+                    0,
+                    0,
+                    1,
+                    5,
+                    2,
+                    2,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    0,
+                    5,
+                    2,
+                    2,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    1,
+                    0,
+                    0,
+                    5,
+                    0,
+                    2,
+                    2,
+                    0
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    0,
+                    5,
+                    0,
+                    2,
+                    2,
+                    0
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    0,
+                    0,
+                    0,
+                    1
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    0
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 1.0
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        2,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0,
+                        5,
+                        0,
+                        0,
+                        0,
+                        2
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        2,
+                        2,
+                        2,
+                        1
+                      ],
+                      [
+                        1,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        2
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        6,
+                        6,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        6,
+                        6,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        6,
+                        6,
+                        1
+                      ],
+                      [
+                        1,
+                        6,
+                        6,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        3,
+                        3,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        3,
+                        3,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        3,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        0,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        1,
+                        0,
+                        1,
+                        1,
+                        5,
+                        0,
+                        7,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        1,
+                        0,
+                        5,
+                        0,
+                        7,
+                        0,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        1,
+                        7,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        7,
+                        1,
+                        7
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    1,
+                    1,
+                    0,
+                    0,
+                    5,
+                    0,
+                    0,
+                    3,
+                    3
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1,
+                    5,
+                    0,
+                    3,
+                    3,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1,
+                    5,
+                    0,
+                    3,
+                    3,
+                    0
+                  ],
+                  [
+                    1,
+                    1,
+                    0,
+                    0,
+                    5,
+                    0,
+                    0,
+                    3,
+                    3
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    1,
+                    1,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    0,
+                    0
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 0.5
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        2,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0,
+                        5,
+                        0,
+                        0,
+                        0,
+                        2
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        2,
+                        2,
+                        2,
+                        1
+                      ],
+                      [
+                        1,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        2
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        3,
+                        3
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        3,
+                        3,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        3,
+                        3,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        3,
+                        3
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        3,
+                        3
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        3,
+                        3
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        3,
+                        3,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        3,
+                        3,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        3,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        0,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        1,
+                        0,
+                        1,
+                        1,
+                        5,
+                        0,
+                        7,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        1,
+                        0,
+                        5,
+                        0,
+                        7,
+                        0,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        1,
+                        7,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        7,
+                        1,
+                        7
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    5,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1,
+                    5,
+                    0,
+                    6,
+                    6,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1,
+                    5,
+                    0,
+                    6,
+                    6,
+                    0
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    5,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 0.75
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        2,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0,
+                        5,
+                        0,
+                        0,
+                        0,
+                        2
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        2,
+                        2,
+                        2,
+                        1
+                      ],
+                      [
+                        1,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        2
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        3,
+                        3
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        3,
+                        3,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        3,
+                        3,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        3,
+                        3
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        3,
+                        3
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        3,
+                        3
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        6,
+                        6,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        6,
+                        6,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        6,
+                        6,
+                        1
+                      ],
+                      [
+                        1,
+                        6,
+                        6,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        3,
+                        3,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        3,
+                        3,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        3,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        0,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        1,
+                        0,
+                        1,
+                        1,
+                        5,
+                        0,
+                        7,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        1,
+                        0,
+                        5,
+                        0,
+                        7,
+                        0,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        1,
+                        7,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        7,
+                        1,
+                        7
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    5,
+                    2,
+                    2,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1,
+                    5,
+                    2,
+                    2,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1,
+                    5,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    5,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 1.0
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        2,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0,
+                        5,
+                        0,
+                        0,
+                        0,
+                        2
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        2,
+                        2,
+                        2,
+                        1
+                      ],
+                      [
+                        1,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        2
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        3,
+                        3
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        3,
+                        3,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        3,
+                        3,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        3,
+                        3
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        3,
+                        3
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        3,
+                        3
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        6,
+                        6,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        6,
+                        6,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        6,
+                        6,
+                        1
+                      ],
+                      [
+                        1,
+                        6,
+                        6,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        0,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        1,
+                        0,
+                        1,
+                        1,
+                        5,
+                        0,
+                        7,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        1,
+                        0,
+                        5,
+                        0,
+                        7,
+                        0,
+                        7
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        7,
+                        7,
+                        7
+                      ],
+                      [
+                        1,
+                        7,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        7,
+                        1,
+                        7
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    5,
+                    3,
+                    3,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1,
+                    5,
+                    3,
+                    3,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1,
+                    5,
+                    3,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1,
+                    5,
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    1
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 1.0
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        2,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0,
+                        5,
+                        0,
+                        0,
+                        0,
+                        2
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        2,
+                        2,
+                        2,
+                        1
+                      ],
+                      [
+                        1,
+                        2,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        2,
+                        2
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        2
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0,
+                        5,
+                        0,
+                        2,
+                        2,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        0,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        0
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        3,
+                        3
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        3,
+                        3,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        3,
+                        3,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        0,
+                        0,
+                        5,
+                        0,
+                        0,
+                        3,
+                        3
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        3,
+                        3
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        3,
+                        3
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        6,
+                        6,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        6,
+                        6,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        6,
+                        6,
+                        1
+                      ],
+                      [
+                        1,
+                        6,
+                        6,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        2,
+                        2,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        5,
+                        3,
+                        3,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        3,
+                        3,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        3,
+                        0,
+                        0,
+                        0
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1,
+                        5,
+                        0,
+                        0,
+                        0,
+                        0
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ],
+                      [
+                        1,
+                        0,
+                        0,
+                        1
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    5,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    0,
+                    5,
+                    0,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    1,
+                    0,
+                    1,
+                    1,
+                    5,
+                    0,
+                    7,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    1,
+                    0,
+                    5,
+                    0,
+                    7,
+                    0,
+                    7
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    5,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    0,
+                    0,
+                    5,
+                    0,
+                    7,
+                    7,
+                    7
+                  ],
+                  [
+                    1,
+                    0,
+                    1,
+                    1,
+                    5,
+                    0,
+                    7,
+                    0,
+                    0
+                  ],
+                  [
+                    1,
+                    0,
+                    1,
+                    0,
+                    5,
+                    0,
+                    7,
+                    0,
+                    7
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 0.2777777910232544
+            }
+          ],
+          "seed_candidates": [
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs[\"input_grid\"]\n    num_rows = len(grid)\n    result = [row[:num_rows] for row in grid]\n    return {\"output_grid\": result}\n\nresult = transform(inputs)"
+            },
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs.get(\"input_grid\")\n    if not grid:\n        return {\"output_grid\": []}\n    \n    rows = len(grid)\n    cols = len(grid[0]) if rows > 0 else 0\n    if rows == 0 or cols == 0 or any(len(row) != cols for row in grid):\n        return {\"output_grid\": []}\n    \n    # Find min_row and min_col\n    min_row = min((i for i in range(rows) if any(grid[i][j] != 0 for j in range(cols))), default=-1)\n    min_col = min((j for j in range(cols) if any(grid[i][j] != 0 for i in range(rows))), default=-1)\n    \n    if min_row == -1 or min_col == -1:\n        return {\"output_grid\": []}\n    \n    # Extract the 4x4 subgrid starting from min_row, min_col (assuming the bounding box is >=4x4)\n    output_grid = [[grid[i][j] for j in range(min_col, min_col + 4)] for i in range(min_row, min_row + 4)]\n    \n    return {\"output_grid\": output_grid}\n\nresult = transform(inputs)\n"
+            },
+            {
+              "examples": [],
+              "python_script": "\ndef transform(inputs):\n    # TODO implement the python function to transform the input grid into the output grid\n    return {\"output_grid\": inputs.get(\"input_grid\")}\n    \nresult = transform(inputs)\n"
+            }
+          ],
+          "candidates": [
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs.get(\"input_grid\")\n    if not grid:\n        return {\"output_grid\": []}\n    \n    rows = len(grid)\n    cols = len(grid[0]) if rows > 0 else 0\n    if rows == 0 or cols == 0 or any(len(row) != cols for row in grid):\n        return {\"output_grid\": []}\n    \n    # Find min_row and min_col\n    min_row = min((i for i in range(rows) if any(grid[i][j] != 0 for j in range(cols))), default=-1)\n    min_col = min((j for j in range(cols) if any(grid[i][j] != 0 for i in range(rows))), default=-1)\n    \n    if min_row == -1 or min_col == -1:\n        return {\"output_grid\": []}\n    \n    # Extract the 4x4 subgrid starting from min_row, min_col\n    output_grid = [[grid[i][j] for j in range(min_col, min_col + 4)] for i in range(min_row, min_row + 4)]\n    \n    # Modify: for each cell in output_grid, if it is 0, replace with the value from the corresponding position in the right (j+5 in original grid)\n    for i in range(4):\n        for j in range(4):\n            if output_grid[i][j] == 0:\n                original_j = min_col + j + 5  # corresponding right column\n                if original_j < cols:\n                    output_grid[i][j] = grid[min_row + i][original_j]\n    \n    return {\"output_grid\": output_grid}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 0.90625
+            },
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs.get(\"input_grid\")\n    if not grid or len(grid) != 4 or any(len(row) != 9 for row in grid):\n        return {\"output_grid\": []}\n    \n    # Extract left (cols 0-3) and right (cols 5-8)\n    left = [[grid[i][j] for j in range(4)] for i in range(4)]\n    right = [[grid[i][j] for j in range(5, 9)] for i in range(4)]\n    \n    # Find positions where left has 1\n    left_ones = set((i, j) for i in range(4) for j in range(4) if left[i][j] == 1)\n    \n    # Find positions where right has non-zero\n    right_nonzero = set((i, j) for i in range(4) for j in range(4) if right[i][j] != 0)\n    \n    if left_ones & right_nonzero:\n        # Intersection exists, output left\n        output_grid = left\n    else:\n        # No intersection, combine\n        output_grid = [[right[i][j] if right[i][j] != 0 else left[i][j] for j in range(4)] for i in range(4)]\n    \n    return {\"output_grid\": output_grid}\n\nresult = transform(inputs)",
+              "examples": [],
+              "reward": 1.0
+            },
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs[\"input_grid\"]\n    result = []\n    for row in grid:\n        left = row[:4]\n        right = row[5:9]  # Right part starts after the 5 at index 4\n        zero_positions = [j for j in range(4) if left[j] == 0]\n        if zero_positions:\n            values = [right[j] for j in zero_positions]\n            if all(v != 0 for v in values) and len(set(values)) == 1:\n                fill_value = values[0]\n                new_left = [fill_value if x == 0 else x for x in left]\n            else:\n                new_left = left\n        else:\n            new_left = left\n        result.append(new_left)\n    return {\"output_grid\": result}\n\nresult = transform(inputs)",
+              "examples": [],
+              "reward": 0.9375
+            },
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs.get(\"input_grid\")\n    if not grid:\n        return {\"output_grid\": []}\n    rows = len(grid)\n    cols = len(grid[0]) if rows > 0 else 0\n    if rows == 0 or cols == 0 or any(len(row) != cols for row in grid):\n        return {\"output_grid\": []}\n    output_grid = [row[:4] for row in grid]  # Extract left 4 columns\n    for i in range(rows):\n        color = None\n        for j in range(5, cols):  # Check right part for first non-zero\n            if grid[i][j] != 0:\n                color = grid[i][j]\n                break\n        if color is not None:\n            for k in range(4):  # Replace 0s in output_grid with the color\n                if output_grid[i][k] == 0:\n                    output_grid[i][k] = color\n    return {\"output_grid\": output_grid}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 0.875
+            },
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs['input_grid']\n    # Find the column index of '5', assuming it's the same for all rows\n    pos = next(i for i, val in enumerate(grid[0]) if val == 5)\n    # Extract the subgrid to the left of the '5' column\n    result = [row[:pos] for row in grid]\n    return {'output_grid': result}\n\nresult = transform(inputs)",
+              "examples": [],
+              "reward": 0.75
+            },
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs[\"input_grid\"]\n    num_rows = len(grid)\n    result = [row[:num_rows] for row in grid]\n    return {\"output_grid\": result}\n\nresult = transform(inputs)",
+              "examples": [],
+              "reward": 0.75
+            },
+            {
+              "python_script": "\ndef transform(inputs):\n    grid = inputs['input_grid']\n    left = [row[:4] for row in grid]\n    right = [row[5:9] for row in grid]\n    \n    # Check if all 0s in left are covered by non-zeros in right\n    covered = True\n    for i in range(4):\n        for j in range(4):\n            if left[i][j] == 0 and right[i][j] == 0:\n                covered = False\n                break\n        if not covered:\n            break\n    \n    if covered:\n        # Find the color from right's non-zero values\n        color = None\n        for row in right:\n            for val in row:\n                if val != 0:\n                    if color is None:\n                        color = val\n                    elif color != val:\n                        raise ValueError(\"Inconsistent color in right grid\")\n        # Replace 0s in left with color\n        output = [[left[i][j] if left[i][j] == 1 else color for j in range(4)] for i in range(4)]\n    else:\n        output = left\n    \n    return {\"output_grid\": output}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 1.0
+            }
+          ],
+          "best_candidates": [
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs.get(\"input_grid\")\n    if not grid or len(grid) != 4 or any(len(row) != 9 for row in grid):\n        return {\"output_grid\": []}\n    \n    # Extract left (cols 0-3) and right (cols 5-8)\n    left = [[grid[i][j] for j in range(4)] for i in range(4)]\n    right = [[grid[i][j] for j in range(5, 9)] for i in range(4)]\n    \n    # Find positions where left has 1\n    left_ones = set((i, j) for i in range(4) for j in range(4) if left[i][j] == 1)\n    \n    # Find positions where right has non-zero\n    right_nonzero = set((i, j) for i in range(4) for j in range(4) if right[i][j] != 0)\n    \n    if left_ones & right_nonzero:\n        # Intersection exists, output left\n        output_grid = left\n    else:\n        # No intersection, combine\n        output_grid = [[right[i][j] if right[i][j] != 0 else left[i][j] for j in range(4)] for i in range(4)]\n    \n    return {\"output_grid\": output_grid}\n\nresult = transform(inputs)",
+              "examples": [],
+              "reward": 1.0
+            },
+            {
+              "python_script": "\ndef transform(inputs):\n    grid = inputs['input_grid']\n    left = [row[:4] for row in grid]\n    right = [row[5:9] for row in grid]\n    \n    # Check if all 0s in left are covered by non-zeros in right\n    covered = True\n    for i in range(4):\n        for j in range(4):\n            if left[i][j] == 0 and right[i][j] == 0:\n                covered = False\n                break\n        if not covered:\n            break\n    \n    if covered:\n        # Find the color from right's non-zero values\n        color = None\n        for row in right:\n            for val in row:\n                if val != 0:\n                    if color is None:\n                        color = val\n                    elif color != val:\n                        raise ValueError(\"Inconsistent color in right grid\")\n        # Replace 0s in left with color\n        output = [[left[i][j] if left[i][j] == 1 else color for j in range(4)] for i in range(4)]\n    else:\n        output = left\n    \n    return {\"output_grid\": output}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 1.0
+            },
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs[\"input_grid\"]\n    result = []\n    for row in grid:\n        left = row[:4]\n        right = row[5:9]  # Right part starts after the 5 at index 4\n        zero_positions = [j for j in range(4) if left[j] == 0]\n        if zero_positions:\n            values = [right[j] for j in zero_positions]\n            if all(v != 0 for v in values) and len(set(values)) == 1:\n                fill_value = values[0]\n                new_left = [fill_value if x == 0 else x for x in left]\n            else:\n                new_left = left\n        else:\n            new_left = left\n        result.append(new_left)\n    return {\"output_grid\": result}\n\nresult = transform(inputs)",
+              "examples": [],
+              "reward": 0.9375
+            },
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs.get(\"input_grid\")\n    if not grid:\n        return {\"output_grid\": []}\n    \n    rows = len(grid)\n    cols = len(grid[0]) if rows > 0 else 0\n    if rows == 0 or cols == 0 or any(len(row) != cols for row in grid):\n        return {\"output_grid\": []}\n    \n    # Find min_row and min_col\n    min_row = min((i for i in range(rows) if any(grid[i][j] != 0 for j in range(cols))), default=-1)\n    min_col = min((j for j in range(cols) if any(grid[i][j] != 0 for i in range(rows))), default=-1)\n    \n    if min_row == -1 or min_col == -1:\n        return {\"output_grid\": []}\n    \n    # Extract the 4x4 subgrid starting from min_row, min_col\n    output_grid = [[grid[i][j] for j in range(min_col, min_col + 4)] for i in range(min_row, min_row + 4)]\n    \n    # Modify: for each cell in output_grid, if it is 0, replace with the value from the corresponding position in the right (j+5 in original grid)\n    for i in range(4):\n        for j in range(4):\n            if output_grid[i][j] == 0:\n                original_j = min_col + j + 5  # corresponding right column\n                if original_j < cols:\n                    output_grid[i][j] = grid[min_row + i][original_j]\n    \n    return {\"output_grid\": output_grid}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 0.90625
+            },
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs.get(\"input_grid\")\n    if not grid:\n        return {\"output_grid\": []}\n    rows = len(grid)\n    cols = len(grid[0]) if rows > 0 else 0\n    if rows == 0 or cols == 0 or any(len(row) != cols for row in grid):\n        return {\"output_grid\": []}\n    output_grid = [row[:4] for row in grid]  # Extract left 4 columns\n    for i in range(rows):\n        color = None\n        for j in range(5, cols):  # Check right part for first non-zero\n            if grid[i][j] != 0:\n                color = grid[i][j]\n                break\n        if color is not None:\n            for k in range(4):  # Replace 0s in output_grid with the color\n                if output_grid[i][k] == 0:\n                    output_grid[i][k] = color\n    return {\"output_grid\": output_grid}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 0.875
+            }
+          ],
+          "history": [],
+          "nb_visit": 1,
+          "cumulative_reward": 0.2777777910232544,
+          "python_script": "\ndef transform(inputs):\n    grid = inputs['input_grid']\n    left = [row[:4] for row in grid]\n    right = [row[5:9] for row in grid]\n    \n    # Check if all 0s in left are covered by non-zeros in right\n    covered = True\n    for i in range(4):\n        for j in range(4):\n            if left[i][j] == 0 and right[i][j] == 0:\n                covered = False\n                break\n        if not covered:\n            break\n    \n    if covered:\n        # Find the color from right's non-zero values\n        color = None\n        for row in right:\n            for val in row:\n                if val != 0:\n                    if color is None:\n                        color = val\n                    elif color != val:\n                        raise ValueError(\"Inconsistent color in right grid\")\n        # Replace 0s in left with color\n        output = [[left[i][j] if left[i][j] == 1 else color for j in range(4)] for i in range(4)]\n    else:\n        output = left\n    \n    return {\"output_grid\": output}\n\nresult = transform(inputs)\n"
+        }
+      }
+    },
+    "non_trainable_variables": {},
+    "optimizer_trainable_variables": {},
+    "optimizer_non_trainable_variables": {
+      "omega_571": {
+        "iterations_omega_571": {
+          "iterations": 0,
+          "epochs": 0
+        }
+      }
+    },
+    "metrics_variables": {
+      "reward": {
+        "total_with_count": {
+          "total": 0.0,
+          "count": 0
+        }
+      }
+    }
+  }
+}

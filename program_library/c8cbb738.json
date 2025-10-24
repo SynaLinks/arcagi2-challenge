@@ -1,0 +1,3249 @@
+{
+  "module": "synalinks.src.programs.functional",
+  "class_name": "Functional",
+  "config": {
+    "name": "arcagi_task_c8cbb738",
+    "trainable": true,
+    "modules": [
+      {
+        "module": "synalinks.modules",
+        "class_name": "InputModule",
+        "config": {
+          "schema": {
+            "$defs": {
+              "ARCAGITask": {
+                "additionalProperties": false,
+                "description": "Single transformation example",
+                "properties": {
+                  "input_grid": {
+                    "description": "The input grid (list of integer list)",
+                    "items": {
+                      "items": {
+                        "$ref": "#/$defs/Color"
+                      },
+                      "type": "array"
+                    },
+                    "title": "Input Grid",
+                    "type": "array"
+                  },
+                  "output_grid": {
+                    "description": "The output grid (list of integer list)",
+                    "items": {
+                      "items": {
+                        "$ref": "#/$defs/Color"
+                      },
+                      "type": "array"
+                    },
+                    "title": "Output Grid",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "input_grid",
+                  "output_grid"
+                ],
+                "title": "ARCAGITask",
+                "type": "object"
+              },
+              "Color": {
+                "description": "ARC-AGI color palette",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9
+                ],
+                "title": "Color",
+                "type": "integer"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Input for the ARC-AGI solver",
+            "properties": {
+              "examples": {
+                "description": "A set of transformation examples",
+                "items": {
+                  "$ref": "#/$defs/ARCAGITask"
+                },
+                "title": "Examples",
+                "type": "array"
+              },
+              "input_grid": {
+                "description": "The input grid (list of integer list)",
+                "items": {
+                  "items": {
+                    "$ref": "#/$defs/Color"
+                  },
+                  "type": "array"
+                },
+                "title": "Input Grid",
+                "type": "array"
+              }
+            },
+            "required": [
+              "examples",
+              "input_grid"
+            ],
+            "title": "ARCAGIInput",
+            "type": "object"
+          },
+          "optional": false,
+          "name": "input_module_1",
+          "description": "Defines the input data model for a program."
+        },
+        "registered_name": null,
+        "name": "input_module_1",
+        "inbound_nodes": []
+      },
+      {
+        "module": "synalinks.modules",
+        "class_name": "PythonSynthesis",
+        "config": {
+          "schema": {
+            "$defs": {
+              "Color": {
+                "description": "ARC-AGI color palette",
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9
+                ],
+                "title": "Color",
+                "type": "integer"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Output from the ARC-AGI solver",
+            "properties": {
+              "output_grid": {
+                "description": "The output grid (list of integer list)",
+                "items": {
+                  "items": {
+                    "$ref": "#/$defs/Color"
+                  },
+                  "type": "array"
+                },
+                "title": "Output Grid",
+                "type": "array"
+              }
+            },
+            "required": [
+              "output_grid"
+            ],
+            "title": "ARCAGIOutput",
+            "type": "object"
+          },
+          "python_script": "\ndef transform(inputs):\n    # TODO implement the python function to transform the input grid into the output grid\n    return {\"output_grid\": inputs.get(\"input_grid\")}\n    \nresult = transform(inputs)\n",
+          "seed_scripts": [],
+          "default_return_value": {
+            "output_grid": [
+              []
+            ]
+          },
+          "name": "python_synthesis_1",
+          "description": "A code Python code transformation on JSON data.",
+          "trainable": true
+        },
+        "registered_name": null,
+        "name": "python_synthesis_1",
+        "inbound_nodes": [
+          {
+            "args": [
+              {
+                "class_name": "__symbolic_data_model__",
+                "config": {
+                  "schema": {
+                    "$defs": {
+                      "ARCAGITask": {
+                        "additionalProperties": false,
+                        "description": "Single transformation example",
+                        "properties": {
+                          "input_grid": {
+                            "description": "The input grid (list of integer list)",
+                            "items": {
+                              "items": {
+                                "$ref": "#/$defs/Color"
+                              },
+                              "type": "array"
+                            },
+                            "title": "Input Grid",
+                            "type": "array"
+                          },
+                          "output_grid": {
+                            "description": "The output grid (list of integer list)",
+                            "items": {
+                              "items": {
+                                "$ref": "#/$defs/Color"
+                              },
+                              "type": "array"
+                            },
+                            "title": "Output Grid",
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "input_grid",
+                          "output_grid"
+                        ],
+                        "title": "ARCAGITask",
+                        "type": "object"
+                      },
+                      "Color": {
+                        "description": "ARC-AGI color palette",
+                        "enum": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9
+                        ],
+                        "title": "Color",
+                        "type": "integer"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "Input for the ARC-AGI solver",
+                    "properties": {
+                      "examples": {
+                        "description": "A set of transformation examples",
+                        "items": {
+                          "$ref": "#/$defs/ARCAGITask"
+                        },
+                        "title": "Examples",
+                        "type": "array"
+                      },
+                      "input_grid": {
+                        "description": "The input grid (list of integer list)",
+                        "items": {
+                          "items": {
+                            "$ref": "#/$defs/Color"
+                          },
+                          "type": "array"
+                        },
+                        "title": "Input Grid",
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "examples",
+                      "input_grid"
+                    ],
+                    "title": "ARCAGIInput",
+                    "type": "object"
+                  },
+                  "synalinks_history": [
+                    "input_module_1",
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "kwargs": {
+              "training": false
+            }
+          }
+        ]
+      }
+    ],
+    "input_modules": [
+      [
+        "input_module_1",
+        0,
+        0
+      ]
+    ],
+    "output_modules": [
+      [
+        "python_synthesis_1",
+        0,
+        0
+      ]
+    ]
+  },
+  "registered_name": "Functional",
+  "compile_config": {
+    "optimizer": {
+      "module": "synalinks.optimizers",
+      "class_name": "OMEGA",
+      "config": {
+        "k_nearest_fitter": 5,
+        "mutation_temperature": 1.0,
+        "crossover_temperature": 1.0,
+        "few_shot_learning": false,
+        "nb_min_examples": 1,
+        "nb_max_examples": 3,
+        "sampling_temperature": 1.0,
+        "merging_rate": 0.02,
+        "population_size": 10,
+        "name": "omega_1",
+        "description": "OMEGA: OptiMizEr as Genetic Algorithm - A genetic optimizer with dominated novelty search.",
+        "language_model": {
+          "module": "synalinks",
+          "class_name": "LanguageModel",
+          "config": {
+            "model": "xai/grok-code-fast-1",
+            "api_base": null,
+            "timeout": 600,
+            "retry": 5,
+            "caching": false
+          },
+          "registered_name": null
+        },
+        "embedding_model": {
+          "module": "synalinks",
+          "class_name": "EmbeddingModel",
+          "config": {
+            "model": "ollama/mxbai-embed-large",
+            "api_base": "http://localhost:11434",
+            "retry": 5
+          },
+          "registered_name": null
+        }
+      },
+      "registered_name": null
+    },
+    "reward": {
+      "module": "synalinks.rewards",
+      "class_name": "RewardFunctionWrapper",
+      "config": {
+        "name": "reward_function_wrapper_1",
+        "reduction": "mean",
+        "in_mask": [
+          "output_grid"
+        ],
+        "out_mask": null,
+        "fn": {
+          "module": "builtins",
+          "class_name": "function",
+          "config": "Custom>grid_similarity",
+          "registered_name": "function"
+        }
+      },
+      "registered_name": null
+    },
+    "reward_weights": null,
+    "metrics": [
+      {
+        "module": "synalinks.metrics",
+        "class_name": "MeanMetricWrapper",
+        "config": {
+          "in_mask": [
+            "output_grid"
+          ],
+          "out_mask": null,
+          "name": "exact_match",
+          "fn": {
+            "module": "builtins",
+            "class_name": "function",
+            "config": "exact_match",
+            "registered_name": "function"
+          }
+        },
+        "registered_name": null
+      }
+    ],
+    "run_eagerly": false,
+    "steps_per_execution": 1
+  },
+  "variables": {
+    "trainable_variables": {
+      "python_synthesis_1": {
+        "state_python_synthesis_1": {
+          "examples": [],
+          "current_predictions": [],
+          "predictions": [
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        8,
+                        1,
+                        8,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        8,
+                        1,
+                        8,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        3,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        3,
+                        1,
+                        3,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        3,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        8,
+                        3,
+                        8
+                      ],
+                      [
+                        3,
+                        1,
+                        3
+                      ],
+                      [
+                        8,
+                        3,
+                        8
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        4,
+                        7,
+                        4,
+                        1
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        7,
+                        4,
+                        4,
+                        4,
+                        7
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        1,
+                        4,
+                        7,
+                        4,
+                        1
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    4,
+                    3,
+                    4,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    1,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    1,
+                    3,
+                    3,
+                    3,
+                    1,
+                    4,
+                    3,
+                    4,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    1,
+                    3,
+                    2,
+                    3,
+                    3,
+                    3,
+                    2
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    8,
+                    3,
+                    3,
+                    3,
+                    8,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    8,
+                    3,
+                    3,
+                    3,
+                    8,
+                    3,
+                    2,
+                    3,
+                    3,
+                    3,
+                    2
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    2,
+                    4,
+                    1,
+                    4,
+                    2
+                  ],
+                  [
+                    8,
+                    3,
+                    3,
+                    3,
+                    8
+                  ],
+                  [
+                    1,
+                    3,
+                    3,
+                    3,
+                    1
+                  ],
+                  [
+                    8,
+                    3,
+                    3,
+                    3,
+                    8
+                  ],
+                  [
+                    2,
+                    4,
+                    1,
+                    4,
+                    2
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 1.0
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        8,
+                        1,
+                        8,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        8,
+                        1,
+                        8,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        3,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        3,
+                        1,
+                        3,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        3,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        8,
+                        3,
+                        8
+                      ],
+                      [
+                        3,
+                        1,
+                        3
+                      ],
+                      [
+                        8,
+                        3,
+                        8
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        4,
+                        7,
+                        4,
+                        1
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        7,
+                        4,
+                        4,
+                        4,
+                        7
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        1,
+                        4,
+                        7,
+                        4,
+                        1
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    4,
+                    3,
+                    4,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    1,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    1,
+                    3,
+                    3,
+                    3,
+                    1,
+                    4,
+                    3,
+                    4,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    1,
+                    3,
+                    2,
+                    3,
+                    3,
+                    3,
+                    2
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    8,
+                    3,
+                    3,
+                    3,
+                    8,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    8,
+                    3,
+                    3,
+                    3,
+                    8,
+                    3,
+                    2,
+                    3,
+                    3,
+                    3,
+                    2
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    2,
+                    4,
+                    1,
+                    4,
+                    2
+                  ],
+                  [
+                    8,
+                    3,
+                    3,
+                    3,
+                    8
+                  ],
+                  [
+                    1,
+                    3,
+                    3,
+                    3,
+                    1
+                  ],
+                  [
+                    8,
+                    3,
+                    3,
+                    3,
+                    8
+                  ],
+                  [
+                    2,
+                    4,
+                    1,
+                    4,
+                    2
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 1.0
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        4,
+                        3,
+                        4,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        1,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        1,
+                        3,
+                        3,
+                        3,
+                        1,
+                        4,
+                        3,
+                        4,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        1,
+                        3,
+                        2,
+                        3,
+                        3,
+                        3,
+                        2
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        8,
+                        3,
+                        3,
+                        3,
+                        8,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        8,
+                        3,
+                        3,
+                        3,
+                        8,
+                        3,
+                        2,
+                        3,
+                        3,
+                        3,
+                        2
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        2,
+                        4,
+                        1,
+                        4,
+                        2
+                      ],
+                      [
+                        8,
+                        3,
+                        3,
+                        3,
+                        8
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        8,
+                        3,
+                        3,
+                        3,
+                        8
+                      ],
+                      [
+                        2,
+                        4,
+                        1,
+                        4,
+                        2
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        4,
+                        7,
+                        4,
+                        1
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        7,
+                        4,
+                        4,
+                        4,
+                        7
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        1,
+                        4,
+                        7,
+                        4,
+                        1
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    8,
+                    1,
+                    8,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    8,
+                    1,
+                    8,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    3,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    3,
+                    1,
+                    3,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    3,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    8,
+                    3,
+                    8
+                  ],
+                  [
+                    3,
+                    1,
+                    3
+                  ],
+                  [
+                    8,
+                    3,
+                    8
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 0.0
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        4,
+                        3,
+                        4,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        1,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        1,
+                        3,
+                        3,
+                        3,
+                        1,
+                        4,
+                        3,
+                        4,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        1,
+                        3,
+                        2,
+                        3,
+                        3,
+                        3,
+                        2
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        8,
+                        3,
+                        3,
+                        3,
+                        8,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ],
+                      [
+                        8,
+                        3,
+                        3,
+                        3,
+                        8,
+                        3,
+                        2,
+                        3,
+                        3,
+                        3,
+                        2
+                      ],
+                      [
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3,
+                        3
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        2,
+                        4,
+                        1,
+                        4,
+                        2
+                      ],
+                      [
+                        8,
+                        3,
+                        3,
+                        3,
+                        8
+                      ],
+                      [
+                        1,
+                        3,
+                        3,
+                        3,
+                        1
+                      ],
+                      [
+                        8,
+                        3,
+                        3,
+                        3,
+                        8
+                      ],
+                      [
+                        2,
+                        4,
+                        1,
+                        4,
+                        2
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        4,
+                        7,
+                        4,
+                        1
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        7,
+                        4,
+                        4,
+                        4,
+                        7
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        1,
+                        4,
+                        7,
+                        4,
+                        1
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    8,
+                    1,
+                    8,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    8,
+                    1,
+                    8,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    3,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    3,
+                    1,
+                    3,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    3,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1,
+                    1
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    8,
+                    3,
+                    8
+                  ],
+                  [
+                    3,
+                    1,
+                    3
+                  ],
+                  [
+                    8,
+                    3,
+                    8
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 1.0
+            },
+            {
+              "inputs": {
+                "examples": [
+                  {
+                    "input_grid": [
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        8,
+                        1,
+                        8,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        8,
+                        1,
+                        8,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        3,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        3,
+                        1,
+                        3,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        3,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ],
+                      [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        8,
+                        3,
+                        8
+                      ],
+                      [
+                        3,
+                        1,
+                        3
+                      ],
+                      [
+                        8,
+                        3,
+                        8
+                      ]
+                    ]
+                  },
+                  {
+                    "input_grid": [
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        4,
+                        1,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        7,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ]
+                    ],
+                    "output_grid": [
+                      [
+                        1,
+                        4,
+                        7,
+                        4,
+                        1
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        7,
+                        4,
+                        4,
+                        4,
+                        7
+                      ],
+                      [
+                        4,
+                        4,
+                        4,
+                        4,
+                        4
+                      ],
+                      [
+                        1,
+                        4,
+                        7,
+                        4,
+                        1
+                      ]
+                    ]
+                  }
+                ],
+                "input_grid": [
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    4,
+                    3,
+                    4,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    1,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    1,
+                    3,
+                    3,
+                    3,
+                    1,
+                    4,
+                    3,
+                    4,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    1,
+                    3,
+                    2,
+                    3,
+                    3,
+                    3,
+                    2
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    8,
+                    3,
+                    3,
+                    3,
+                    8,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ],
+                  [
+                    8,
+                    3,
+                    3,
+                    3,
+                    8,
+                    3,
+                    2,
+                    3,
+                    3,
+                    3,
+                    2
+                  ],
+                  [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                  ]
+                ]
+              },
+              "outputs": {
+                "output_grid": [
+                  [
+                    2,
+                    4,
+                    1,
+                    4,
+                    2
+                  ],
+                  [
+                    8,
+                    3,
+                    3,
+                    3,
+                    8
+                  ],
+                  [
+                    1,
+                    3,
+                    3,
+                    3,
+                    1
+                  ],
+                  [
+                    8,
+                    3,
+                    3,
+                    3,
+                    8
+                  ],
+                  [
+                    2,
+                    4,
+                    1,
+                    4,
+                    2
+                  ]
+                ],
+                "stdout": "",
+                "stderr": ""
+              },
+              "reward": 0.07999999821186066
+            }
+          ],
+          "seed_candidates": [
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs['input_grid']\n    h = len(grid)\n    w = len(grid[0])\n    background = grid[0][0]\n    colors = {}\n    for i in range(h):\n        for j in range(w):\n            if grid[i][j] != background:\n                if grid[i][j] not in colors:\n                    colors[grid[i][j]] = i\n    sorted_colors = sorted(colors.keys(), key=lambda c: colors[c])\n    if len(sorted_colors) >= 2:\n        width = 5\n        if len(sorted_colors) > 2:\n            output_grid = [[background for _ in range(width)] for _ in range(width)]\n            for ii in range(width):\n                for jj in range(width):\n                    if (ii == 0 or ii == width-1) and (jj == 0 or jj == width-1):\n                        output_grid[ii][jj] = sorted_colors[2]\n                    elif (ii == 1 or ii == width-2) and (jj == 0 or jj == width-1):\n                        output_grid[ii][jj] = sorted_colors[3]\n                    elif ii == width//2 and (jj == 0 or jj == width-1):\n                        output_grid[ii][jj] = sorted_colors[1]\n                    elif (ii == 0 or ii == width-1) and (jj == 1 or jj == width-2):\n                        output_grid[ii][jj] = sorted_colors[0]\n                    else:\n                        output_grid[ii][jj] = background\n        else:\n            background = 4\n            cap_color = 7\n            stem_color = 1\n            output_grid = [[background for _ in range(width)] for _ in range(width)]\n            for ii in range(width):\n                for jj in range(width):\n                    if ii == 0 or ii == width-1:\n                        if jj == 0 or jj == width-1:\n                            output_grid[ii][jj] = stem_color\n                        elif jj == width//2:\n                            output_grid[ii][jj] = cap_color\n                        else:\n                            output_grid[ii][jj] = background\n                    elif ii == width//2:\n                        if jj == 0 or jj == width-1:\n                            output_grid[ii][jj] = cap_color\n                        else:\n                            output_grid[ii][jj] = background\n                    else:\n                        output_grid[ii][jj] = background\n    else:\n        output_grid = [[background]]\n    return {\"output_grid\": output_grid}\n\nresult = transform(inputs)"
+            },
+            {
+              "examples": [],
+              "python_script": "\ndef transform(inputs):\n    # TODO implement the python function to transform the input grid into the output grid\n    return {\"output_grid\": inputs.get(\"input_grid\")}\n    \nresult = transform(inputs)\n"
+            }
+          ],
+          "candidates": [
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs['input_grid']\n    h = len(grid)\n    w = len(grid[0])\n    background = grid[0][0]\n    from collections import defaultdict\n    pos = defaultdict(list)\n    first_row = {}\n    for i in range(h):\n        for j in range(w):\n            c = grid[i][j]\n            if c != background:\n                pos[c].append((i, j))\n                if c not in first_row:\n                    first_row[c] = i\n    list_mixed = []\n    list_vertical = []\n    list_horizontal = []\n    max_size = 1\n    for c, positions in pos.items():\n        if not positions:\n            continue\n        min_r = min(p[0] for p in positions)\n        max_r = max(p[0] for p in positions)\n        min_c = min(p[1] for p in positions)\n        max_c = max(p[1] for p in positions)\n        height = max_r - min_r + 1\n        width = max_c - min_c + 1\n        size = max(height, width)\n        if size > max_size:\n            max_size = size\n        fr = first_row[c]\n        if height > width:\n            list_vertical.append((fr, c))\n        elif width > height:\n            list_horizontal.append((fr, c))\n        else:\n            list_mixed.append((fr, c))\n    list_mixed = [c for fr, c in sorted(list_mixed)]\n    list_vertical = [c for fr, c in sorted(list_vertical)]\n    list_horizontal = [c for fr, c in sorted(list_horizontal)]\n    r = (max_size - 1) // 2\n    s = 2 * r + 1\n    has_oriented = len(list_vertical) + len(list_horizontal) > 0\n    base = list_mixed[:]\n    if has_oriented:\n        base = base[::-1]\n    def build_half_seq(inserted):\n        split = (len(base) + 1) // 2\n        seq = base[:split] + inserted + base[split:]\n        target = r + 1\n        while len(seq) < target:\n            mid = len(seq) // 2\n            seq = seq[:mid] + [background] + seq[mid:]\n        return seq\n    half_h = build_half_seq(list_vertical)\n    half_v = build_half_seq(list_horizontal)\n    def make_full(half):\n        return half[:-1] + half[::-1]\n    full_h = make_full(half_h)\n    full_v = make_full(half_v)\n    output_grid = [[background for _ in range(s)] for _ in range(s)]\n    for j in range(s):\n        output_grid[0][j] = full_h[j]\n        output_grid[s-1][j] = full_h[j]\n    for i in range(s):\n        output_grid[i][0] = full_v[i]\n        output_grid[i][s-1] = full_v[i]\n    return {'output_grid': output_grid}\n\nresult = transform(inputs)",
+              "examples": [],
+              "reward": 1.0
+            },
+            {
+              "python_script": "\ndef transform(inputs):\n    import collections\n    grid = inputs.get('input_grid')\n    if not grid:\n        return {'output_grid': []}\n    rows = len(grid)\n    cols = len(grid[0]) if rows > 0 else 0\n\n    # Find all colors and count occurrences to determine background\n    color_count = collections.Counter(color for row in grid for color in row)\n    bg = color_count.most_common(1)[0][0] if color_count else 0\n\n    # Group positions by color\n    color_positions = collections.defaultdict(list)\n    for i in range(rows):\n        for j in range(cols):\n            c = grid[i][j]\n            if c != bg:\n                color_positions[c].append((i, j))\n\n    # List of patterns\n    patterns = []\n    for c, pos in color_positions.items():\n        if len(pos) != 4:\n            continue\n        # Check if corners\n        row_set = set(p[0] for p in pos)\n        col_set = set(p[1] for p in pos)\n        if len(row_set) == 2 and len(col_set) == 2:\n            r1, r2 = sorted(row_set)\n            c1, c2 = sorted(col_set)\n            if (r2 - r1) % 2 != 0 or (c2 - c1) % 2 != 0:\n                continue\n            k_r = (r2 - r1) // 2\n            k_c = (c2 - c1) // 2\n            expected = set((r, cc) for r in [r1, r2] for cc in [c1, c2])\n            if set(pos) == expected:\n                patterns.append({'type': 'corners', 'k_r': k_r, 'k_c': k_c, 'color': c})\n                continue\n        # Check if cross\n        if len(row_set) == 3:\n            rows_sorted = sorted(row_set)\n            r_min, r_mid, r_max = rows_sorted\n            if r_mid != (r_min + r_max) // 2:\n                continue\n            pos_by_row = collections.defaultdict(list)\n            for p in pos:\n                pos_by_row[p[0]].append(p[1])\n            if len(pos_by_row[r_min]) != 1 or len(pos_by_row[r_max]) != 1 or len(pos_by_row[r_mid]) != 2:\n                continue\n            col_min = pos_by_row[r_min][0]\n            col_max = pos_by_row[r_max][0]\n            if col_min != col_max:\n                continue\n            col_m = col_min\n            cols_mid = sorted(pos_by_row[r_mid])\n            left, right = cols_mid\n            if (left + right) // 2 != col_m:\n                continue\n            if (r_max - r_min) % 2 != 0 or (right - left) % 2 != 0:\n                continue\n            k_r = (r_max - r_min) // 2\n            k_c = (right - left) // 2\n            patterns.append({'type': 'cross', 'k_r': k_r, 'k_c': k_c, 'color': c})\n\n    if not patterns:\n        return {'output_grid': [[bg]]}\n\n    # Find max_k\n    max_k = max(max(p['k_r'], p['k_c']) for p in patterns)\n    if max_k == 1:\n        for p in patterns:\n            p['k_r'] *= 2\n            p['k_c'] *= 2\n        max_k = 2\n    if max_k == 0:\n        return {'output_grid': [[bg]]}\n    n = 2 * max_k + 1\n    center = max_k\n\n    # Initialize output grid\n    output_grid = [[bg for _ in range(n)] for _ in range(n)]\n\n    # Place patterns\n    for p in patterns:\n        if p['type'] == 'corners':\n            row1 = center - p['k_r']\n            row2 = center + p['k_r']\n            col1 = center - p['k_c']\n            col2 = center + p['k_c']\n            output_grid[row1][col1] = p['color']\n            output_grid[row1][col2] = p['color']\n            output_grid[row2][col1] = p['color']\n            output_grid[row2][col2] = p['color']\n        elif p['type'] == 'cross':\n            row_min = center - p['k_r']\n            row_mid = center\n            row_max = center + p['k_r']\n            col_mid = center\n            col_left = center - p['k_c']\n            col_right = center + p['k_c']\n            output_grid[row_min][col_mid] = p['color']\n            output_grid[row_max][col_mid] = p['color']\n            output_grid[row_mid][col_left] = p['color']\n            output_grid[row_mid][col_right] = p['color']\n\n    return {'output_grid': output_grid}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 1.0
+            },
+            {
+              "python_script": "\ndef transform(inputs):\n    from collections import defaultdict, Counter\n    grid = inputs['input_grid']\n    h = len(grid)\n    w = len(grid[0]) if h > 0 else 0\n    all_colors = [c for row in grid for c in row]\n    color_count = Counter(all_colors)\n    bg = color_count.most_common(1)[0][0]\n    colors_pos = defaultdict(list)\n    for i in range(h):\n        for j in range(w):\n            if grid[i][j] != bg:\n                colors_pos[grid[i][j]].append((i, j))\n    groups = []\n    for c, pos in colors_pos.items():\n        if len(pos) != 4:\n            continue\n        sum_i = sum(p[0] for p in pos)\n        sum_j = sum(p[1] for p in pos)\n        if sum_i % 4 != 0 or sum_j % 4 != 0:\n            continue\n        center_i = sum_i // 4\n        center_j = sum_j // 4\n        vecs = [(p[0] - center_i, p[1] - center_j) for p in pos]\n        groups.append((c, vecs))\n    # Check if special mode\n    special = False\n    for c, vecs in groups:\n        max_di_g = max(abs(di) for di, dj in vecs)\n        max_dj_g = max(abs(dj) for di, dj in vecs)\n        if max_di_g != max_dj_g:\n            special = True\n            break\n    if not special:\n        r = 0\n        for _, vecs in groups:\n            for di, dj in vecs:\n                r = max(r, abs(di), abs(dj))\n        s = 2 * r + 1\n        output_grid = [[bg] * s for _ in range(s)]\n        center_out = r\n        for c, vecs in groups:\n            for di, dj in vecs:\n                ii = center_out + di\n                jj = center_out + dj\n                if 0 <= ii < s and 0 <= jj < s:\n                    output_grid[ii][jj] = c\n    else:\n        # Find cross_color\n        cross_color = None\n        for c, vecs in groups:\n            has_vertical = any(dj == 0 for di, dj in vecs)\n            has_horizontal = any(di == 0 for di, dj in vecs)\n            if has_vertical and has_horizontal:\n                cross_color = c\n                break\n        # Find horizontal_stretch_color\n        horiz_color = None\n        max_diff = 0\n        for c, vecs in groups:\n            max_di_g = max(abs(di) for di, dj in vecs)\n            max_dj_g = max(abs(dj) for di, dj in vecs)\n            if max_dj_g > max_di_g:\n                diff = max_dj_g - max_di_g\n                if diff > max_diff:\n                    max_diff = diff\n                    horiz_color = c\n        # Build 3x3 grid\n        r = 1\n        s = 3\n        output_grid = [[bg] * s for _ in range(s)]\n        center_out = 1\n        if horiz_color is not None:\n            # Place X positions\n            x_vecs = [(-1, -1), (-1, 1), (1, -1), (1, 1)]\n            for di, dj in x_vecs:\n                ii = center_out + di\n                jj = center_out + dj\n                if 0 <= ii < s and 0 <= jj < s:\n                    output_grid[ii][jj] = horiz_color\n        if cross_color is not None:\n            # Place center\n            output_grid[center_out][center_out] = cross_color\n    return {\"output_grid\": output_grid}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 0.10204081982374191
+            }
+          ],
+          "best_candidates": [
+            {
+              "python_script": "def transform(inputs):\n    grid = inputs['input_grid']\n    h = len(grid)\n    w = len(grid[0])\n    background = grid[0][0]\n    from collections import defaultdict\n    pos = defaultdict(list)\n    first_row = {}\n    for i in range(h):\n        for j in range(w):\n            c = grid[i][j]\n            if c != background:\n                pos[c].append((i, j))\n                if c not in first_row:\n                    first_row[c] = i\n    list_mixed = []\n    list_vertical = []\n    list_horizontal = []\n    max_size = 1\n    for c, positions in pos.items():\n        if not positions:\n            continue\n        min_r = min(p[0] for p in positions)\n        max_r = max(p[0] for p in positions)\n        min_c = min(p[1] for p in positions)\n        max_c = max(p[1] for p in positions)\n        height = max_r - min_r + 1\n        width = max_c - min_c + 1\n        size = max(height, width)\n        if size > max_size:\n            max_size = size\n        fr = first_row[c]\n        if height > width:\n            list_vertical.append((fr, c))\n        elif width > height:\n            list_horizontal.append((fr, c))\n        else:\n            list_mixed.append((fr, c))\n    list_mixed = [c for fr, c in sorted(list_mixed)]\n    list_vertical = [c for fr, c in sorted(list_vertical)]\n    list_horizontal = [c for fr, c in sorted(list_horizontal)]\n    r = (max_size - 1) // 2\n    s = 2 * r + 1\n    has_oriented = len(list_vertical) + len(list_horizontal) > 0\n    base = list_mixed[:]\n    if has_oriented:\n        base = base[::-1]\n    def build_half_seq(inserted):\n        split = (len(base) + 1) // 2\n        seq = base[:split] + inserted + base[split:]\n        target = r + 1\n        while len(seq) < target:\n            mid = len(seq) // 2\n            seq = seq[:mid] + [background] + seq[mid:]\n        return seq\n    half_h = build_half_seq(list_vertical)\n    half_v = build_half_seq(list_horizontal)\n    def make_full(half):\n        return half[:-1] + half[::-1]\n    full_h = make_full(half_h)\n    full_v = make_full(half_v)\n    output_grid = [[background for _ in range(s)] for _ in range(s)]\n    for j in range(s):\n        output_grid[0][j] = full_h[j]\n        output_grid[s-1][j] = full_h[j]\n    for i in range(s):\n        output_grid[i][0] = full_v[i]\n        output_grid[i][s-1] = full_v[i]\n    return {'output_grid': output_grid}\n\nresult = transform(inputs)",
+              "examples": [],
+              "reward": 1.0
+            },
+            {
+              "python_script": "\ndef transform(inputs):\n    import collections\n    grid = inputs.get('input_grid')\n    if not grid:\n        return {'output_grid': []}\n    rows = len(grid)\n    cols = len(grid[0]) if rows > 0 else 0\n\n    # Find all colors and count occurrences to determine background\n    color_count = collections.Counter(color for row in grid for color in row)\n    bg = color_count.most_common(1)[0][0] if color_count else 0\n\n    # Group positions by color\n    color_positions = collections.defaultdict(list)\n    for i in range(rows):\n        for j in range(cols):\n            c = grid[i][j]\n            if c != bg:\n                color_positions[c].append((i, j))\n\n    # List of patterns\n    patterns = []\n    for c, pos in color_positions.items():\n        if len(pos) != 4:\n            continue\n        # Check if corners\n        row_set = set(p[0] for p in pos)\n        col_set = set(p[1] for p in pos)\n        if len(row_set) == 2 and len(col_set) == 2:\n            r1, r2 = sorted(row_set)\n            c1, c2 = sorted(col_set)\n            if (r2 - r1) % 2 != 0 or (c2 - c1) % 2 != 0:\n                continue\n            k_r = (r2 - r1) // 2\n            k_c = (c2 - c1) // 2\n            expected = set((r, cc) for r in [r1, r2] for cc in [c1, c2])\n            if set(pos) == expected:\n                patterns.append({'type': 'corners', 'k_r': k_r, 'k_c': k_c, 'color': c})\n                continue\n        # Check if cross\n        if len(row_set) == 3:\n            rows_sorted = sorted(row_set)\n            r_min, r_mid, r_max = rows_sorted\n            if r_mid != (r_min + r_max) // 2:\n                continue\n            pos_by_row = collections.defaultdict(list)\n            for p in pos:\n                pos_by_row[p[0]].append(p[1])\n            if len(pos_by_row[r_min]) != 1 or len(pos_by_row[r_max]) != 1 or len(pos_by_row[r_mid]) != 2:\n                continue\n            col_min = pos_by_row[r_min][0]\n            col_max = pos_by_row[r_max][0]\n            if col_min != col_max:\n                continue\n            col_m = col_min\n            cols_mid = sorted(pos_by_row[r_mid])\n            left, right = cols_mid\n            if (left + right) // 2 != col_m:\n                continue\n            if (r_max - r_min) % 2 != 0 or (right - left) % 2 != 0:\n                continue\n            k_r = (r_max - r_min) // 2\n            k_c = (right - left) // 2\n            patterns.append({'type': 'cross', 'k_r': k_r, 'k_c': k_c, 'color': c})\n\n    if not patterns:\n        return {'output_grid': [[bg]]}\n\n    # Find max_k\n    max_k = max(max(p['k_r'], p['k_c']) for p in patterns)\n    if max_k == 1:\n        for p in patterns:\n            p['k_r'] *= 2\n            p['k_c'] *= 2\n        max_k = 2\n    if max_k == 0:\n        return {'output_grid': [[bg]]}\n    n = 2 * max_k + 1\n    center = max_k\n\n    # Initialize output grid\n    output_grid = [[bg for _ in range(n)] for _ in range(n)]\n\n    # Place patterns\n    for p in patterns:\n        if p['type'] == 'corners':\n            row1 = center - p['k_r']\n            row2 = center + p['k_r']\n            col1 = center - p['k_c']\n            col2 = center + p['k_c']\n            output_grid[row1][col1] = p['color']\n            output_grid[row1][col2] = p['color']\n            output_grid[row2][col1] = p['color']\n            output_grid[row2][col2] = p['color']\n        elif p['type'] == 'cross':\n            row_min = center - p['k_r']\n            row_mid = center\n            row_max = center + p['k_r']\n            col_mid = center\n            col_left = center - p['k_c']\n            col_right = center + p['k_c']\n            output_grid[row_min][col_mid] = p['color']\n            output_grid[row_max][col_mid] = p['color']\n            output_grid[row_mid][col_left] = p['color']\n            output_grid[row_mid][col_right] = p['color']\n\n    return {'output_grid': output_grid}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 1.0
+            },
+            {
+              "python_script": "\ndef transform(inputs):\n    import collections\n    grid = inputs.get('input_grid')\n    if not grid:\n        return {'output_grid': []}\n    rows = len(grid)\n    cols = len(grid[0]) if rows > 0 else 0\n\n    # Find all colors and count occurrences to determine background\n    color_count = collections.Counter(color for row in grid for color in row)\n    bg = color_count.most_common(1)[0][0] if color_count else 0\n\n    # Group positions by color\n    color_positions = collections.defaultdict(list)\n    for i in range(rows):\n        for j in range(cols):\n            c = grid[i][j]\n            if c != bg:\n                color_positions[c].append((i, j))\n\n    # List of patterns\n    patterns = []\n    for c, pos in color_positions.items():\n        if len(pos) != 4:\n            continue\n        # Check if corners\n        row_set = set(p[0] for p in pos)\n        col_set = set(p[1] for p in pos)\n        if len(row_set) == 2 and len(col_set) == 2:\n            r1, r2 = sorted(row_set)\n            c1, c2 = sorted(col_set)\n            if (r2 - r1) % 2 != 0 or (c2 - c1) % 2 != 0:\n                continue\n            k_r = (r2 - r1) // 2\n            k_c = (c2 - c1) // 2\n            expected = set((r, cc) for r in [r1, r2] for cc in [c1, c2])\n            if set(pos) == expected:\n                patterns.append({'type': 'corners', 'k_r': k_r, 'k_c': k_c, 'color': c})\n                continue\n        # Check if cross\n        if len(row_set) == 3:\n            rows_sorted = sorted(row_set)\n            r_min, r_mid, r_max = rows_sorted\n            if r_mid != (r_min + r_max) // 2:\n                continue\n            pos_by_row = collections.defaultdict(list)\n            for p in pos:\n                pos_by_row[p[0]].append(p[1])\n            if len(pos_by_row[r_min]) != 1 or len(pos_by_row[r_max]) != 1 or len(pos_by_row[r_mid]) != 2:\n                continue\n            col_min = pos_by_row[r_min][0]\n            col_max = pos_by_row[r_max][0]\n            if col_min != col_max:\n                continue\n            col_m = col_min\n            cols_mid = sorted(pos_by_row[r_mid])\n            left, right = cols_mid\n            if (left + right) // 2 != col_m:\n                continue\n            if (r_max - r_min) % 2 != 0 or (right - left) % 2 != 0:\n                continue\n            k_r = (r_max - r_min) // 2\n            k_c = (right - left) // 2\n            patterns.append({'type': 'cross', 'k_r': k_r, 'k_c': k_c, 'color': c})\n\n    if not patterns:\n        return {'output_grid': [[bg]]}\n\n    # Find max_k\n    max_k = max(max(p['k_r'], p['k_c']) for p in patterns)\n    if max_k == 0:\n        return {'output_grid': [[bg]]}\n    n = 2 * max_k + 1\n    center = max_k\n\n    # Initialize output grid\n    output_grid = [[bg for _ in range(n)] for _ in range(n)]\n\n    # Place patterns\n    for p in patterns:\n        if p['type'] == 'corners':\n            row1 = center - p['k_r']\n            row2 = center + p['k_r']\n            col1 = center - p['k_c']\n            col2 = center + p['k_c']\n            output_grid[row1][col1] = p['color']\n            output_grid[row1][col2] = p['color']\n            output_grid[row2][col1] = p['color']\n            output_grid[row2][col2] = p['color']\n        elif p['type'] == 'cross':\n            row_min = center - p['k_r']\n            row_mid = center\n            row_max = center + p['k_r']\n            col_mid = center\n            col_left = center - p['k_c']\n            col_right = center + p['k_c']\n            output_grid[row_min][col_mid] = p['color']\n            output_grid[row_max][col_mid] = p['color']\n            output_grid[row_mid][col_left] = p['color']\n            output_grid[row_mid][col_right] = p['color']\n\n    return {'output_grid': output_grid}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 1.0
+            },
+            {
+              "python_script": "\ndef transform(inputs):\n    from collections import defaultdict, Counter\n    grid = inputs['input_grid']\n    h = len(grid)\n    w = len(grid[0]) if h > 0 else 0\n    all_colors = [c for row in grid for c in row]\n    color_count = Counter(all_colors)\n    bg = color_count.most_common(1)[0][0]\n    colors_pos = defaultdict(list)\n    for i in range(h):\n        for j in range(w):\n            if grid[i][j] != bg:\n                colors_pos[grid[i][j]].append((i, j))\n    groups = []\n    for c, pos in colors_pos.items():\n        if len(pos) != 4:\n            continue\n        sum_i = sum(p[0] for p in pos)\n        sum_j = sum(p[1] for p in pos)\n        if sum_i % 4 != 0 or sum_j % 4 != 0:\n            continue\n        center_i = sum_i // 4\n        center_j = sum_j // 4\n        vecs = [(p[0] - center_i, p[1] - center_j) for p in pos]\n        groups.append((c, vecs))\n    r = 0\n    for _, vecs in groups:\n        for di, dj in vecs:\n            r = max(r, abs(di), abs(dj))\n    s = 2 * r + 1\n    output_grid = [[bg] * s for _ in range(s)]\n    center_out = r\n    for c, vecs in groups:\n        for di, dj in vecs:\n            ii = center_out + di\n            jj = center_out + dj\n            if 0 <= ii < s and 0 <= jj < s:\n                output_grid[ii][jj] = c\n    return {\"output_grid\": output_grid}\n\nresult = transform(inputs)\n",
+              "examples": [],
+              "reward": 1.0
+            }
+          ],
+          "history": [],
+          "nb_visit": 1,
+          "cumulative_reward": 0.07999999821186066,
+          "python_script": "def transform(inputs):\n    grid = inputs['input_grid']\n    h = len(grid)\n    w = len(grid[0])\n    background = grid[0][0]\n    from collections import defaultdict\n    pos = defaultdict(list)\n    first_row = {}\n    for i in range(h):\n        for j in range(w):\n            c = grid[i][j]\n            if c != background:\n                pos[c].append((i, j))\n                if c not in first_row:\n                    first_row[c] = i\n    list_mixed = []\n    list_vertical = []\n    list_horizontal = []\n    max_size = 1\n    for c, positions in pos.items():\n        if not positions:\n            continue\n        min_r = min(p[0] for p in positions)\n        max_r = max(p[0] for p in positions)\n        min_c = min(p[1] for p in positions)\n        max_c = max(p[1] for p in positions)\n        height = max_r - min_r + 1\n        width = max_c - min_c + 1\n        size = max(height, width)\n        if size > max_size:\n            max_size = size\n        fr = first_row[c]\n        if height > width:\n            list_vertical.append((fr, c))\n        elif width > height:\n            list_horizontal.append((fr, c))\n        else:\n            list_mixed.append((fr, c))\n    list_mixed = [c for fr, c in sorted(list_mixed)]\n    list_vertical = [c for fr, c in sorted(list_vertical)]\n    list_horizontal = [c for fr, c in sorted(list_horizontal)]\n    r = (max_size - 1) // 2\n    s = 2 * r + 1\n    has_oriented = len(list_vertical) + len(list_horizontal) > 0\n    base = list_mixed[:]\n    if has_oriented:\n        base = base[::-1]\n    def build_half_seq(inserted):\n        split = (len(base) + 1) // 2\n        seq = base[:split] + inserted + base[split:]\n        target = r + 1\n        while len(seq) < target:\n            mid = len(seq) // 2\n            seq = seq[:mid] + [background] + seq[mid:]\n        return seq\n    half_h = build_half_seq(list_vertical)\n    half_v = build_half_seq(list_horizontal)\n    def make_full(half):\n        return half[:-1] + half[::-1]\n    full_h = make_full(half_h)\n    full_v = make_full(half_v)\n    output_grid = [[background for _ in range(s)] for _ in range(s)]\n    for j in range(s):\n        output_grid[0][j] = full_h[j]\n        output_grid[s-1][j] = full_h[j]\n    for i in range(s):\n        output_grid[i][0] = full_v[i]\n        output_grid[i][s-1] = full_v[i]\n    return {'output_grid': output_grid}\n\nresult = transform(inputs)"
+        }
+      }
+    },
+    "non_trainable_variables": {},
+    "optimizer_trainable_variables": {},
+    "optimizer_non_trainable_variables": {
+      "omega_1": {
+        "iterations_omega_1": {
+          "iterations": 0,
+          "epochs": 0
+        }
+      }
+    },
+    "metrics_variables": {
+      "reward": {
+        "total_with_count": {
+          "total": 0.0,
+          "count": 0
+        }
+      }
+    }
+  }
+}
