@@ -21,22 +21,26 @@ SUBMISSION_PROGRAM_LIBRARY = {}
 PROGRAM_LIBRARY_LOCK = threading.Lock()
 SUBMISSION_PROGRAM_LIBRARY_LOCK = threading.Lock()
 
+FINAL_SUBMISSION = {}
+
+FINAL_SUBMISSION_LOCK = threading.Lock()
+
 ###############################################################################
 ## Parameters
 ###############################################################################
 
 # Hyperparameters
-POPULATION_SIZE = 10
+POPULATION_SIZE = 5
 K_NEAREST_FITTER = 5
-MUTATION_TEMPERATURE = 1.0
-CROSSOVER_TEMPERATURE = 1.0
+MUTATION_TEMPERATURE = 0.2
+CROSSOVER_TEMPERATURE = 0.2
 MERGING_RATE = 0.02
 
 NB_MAX_SEEDS = 4
 SEED_THRESHOLD = 0.7
 
 # Parameters for building the datasets
-ONE_LEAVE_OUT = False
+ONE_LEAVE_OUT = True
 CURRICULUM = True
 PERMUTATION = False
 REPEAT = 1
@@ -52,6 +56,7 @@ SUBMISSION_PROGRAM_LIBRARY_FOLDER = "submission_programs"
 language_model = synalinks.LanguageModel(
     model="xai/grok-code-fast-1",
     caching=False,
+    timeout=600,
 )
 
 embedding_model = synalinks.EmbeddingModel(
@@ -171,11 +176,9 @@ async def grid_similarity(y_true, y_pred):
 def get_default_python_script() -> str:
     """Return the default python script template for transformation"""
     return """
-# TODO implement utility functions
 
 def transform(inputs):
     # TODO implement the python function to transform the input grid into the output grid
-    # Don't hesitate to implement utility functions to help you
     return {"output_grid": inputs.get("input_grid")}
     
 result = transform(inputs)
@@ -215,6 +218,7 @@ async def build_and_compile_solver(
         seed_scripts=seed_scripts if seed_scripts else None,
         # If the python script raises an exception, return empty grid
         default_return_value={"output_grid": [[]]},
+        return_python_script=True,
         name="python_synthesis_"+task_name
     )(inputs)
     
@@ -271,33 +275,30 @@ async def load_library(task_names: list, program_library: dict, library_folder: 
         task_progress = progress.add_task("Loading programs...", total=len(task_names))
 
         for task_name in task_names:
-            task_checkpoint_filepath = os.path.join(library_folder, f"{task_name}.json")
+            program = await build_and_compile_solver(
+                task_name=task_name,
+                language_model=language_model,
+                embedding_model=embedding_model,
+                python_script=get_default_python_script(),
+                seed_scripts=None,
+            )
+            task_checkpoint_filepath = os.path.join(library_folder, f"{task_name}.variables.json")
             if os.path.exists(task_checkpoint_filepath):
-                program = synalinks.Program.load(task_checkpoint_filepath)
-                program_library[task_name] = program
-            else:
-                program = await build_and_compile_solver(
-                    task_name=task_name,
-                    language_model=language_model,
-                    embedding_model=embedding_model,
-                    python_script=get_default_python_script(),
-                    seed_scripts=None,
-                )
-                program_library[task_name] = program
-            
+                program.load_variables(task_checkpoint_filepath)
+            program_library[task_name] = program
             progress.update(task_progress, advance=1)
-
     print(f"✅ Loaded {len(program_library)} programs")
 
 
-async def is_training_task_completed(task_name: str, program_library: dict, x, y, verbose=False):
+async def is_task_completed(task_name: str, program_library: dict, x, y, verbose=False):
     metrics = await program_library[task_name].evaluate(x=x, y=y, verbose=0 if not verbose else "auto")
     if metrics["exact_match"] == 1.0:
         if verbose:
             print(f"✅ {task_name} completed")
         return True
     if verbose:
-        print(f"❌ {task_name} not completed yet")
+        reward = round(metrics["reward"], 2)
+        print(f"❌ {task_name} not completed yet ({reward}%)")
     return False
 
 
@@ -373,8 +374,15 @@ async def pretrain(epochs: int, batch_size:int, patience: int, repeat:int, concu
         task_progress = progress.add_task("Evaluating tasks...", total=len(task_names))
         
         for task_name in task_names:
-            (x_train, y_train), (x_test, y_test) = synalinks.datasets.arcagi.load_data(task_name=task_name, arc_version=2)
-            completed = await is_training_task_completed(
+            (x_train, y_train), (x_test, y_test) = synalinks.datasets.arcagi.load_data(
+                task_name=task_name,
+                arc_version=2,
+                one_leave_out=ONE_LEAVE_OUT,
+                permutation=PERMUTATION,
+                curriculum_learning=CURRICULUM,
+                repeat=repeat,
+            )
+            completed = await is_task_completed(
                 task_name=task_name,
                 program_library=PROGRAM_LIBRARY,
                 x=x_test,
@@ -404,13 +412,14 @@ async def pretrain(epochs: int, batch_size:int, patience: int, repeat:int, concu
                 loop.close()
     
     async def train_task_async(task_name, epochs, batch_size, patience, repeat):
-        task_checkpoint_filepath = os.path.join(PROGRAM_LIBRARY_FOLDER, f"{task_name}.json")
+        task_checkpoint_filepath = os.path.join(PROGRAM_LIBRARY_FOLDER, f"{task_name}.variables.json")
 
         program_checkpoint_callback = synalinks.callbacks.ProgramCheckpoint(
             filepath=task_checkpoint_filepath,
             monitor="val_reward",
             mode="max",
             save_best_only=True,
+            save_variables_only=True,
         )
         
         early_stopping_callback = synalinks.callbacks.EarlyStopping(
@@ -436,7 +445,7 @@ async def pretrain(epochs: int, batch_size:int, patience: int, repeat:int, concu
             threshold=SEED_THRESHOLD,
         )
         
-        if len(seed_scripts) < NB_MAX_SEEDS:
+        if len(seed_scripts) == 0:
             seed_scripts.append(get_default_python_script())
         
         with PROGRAM_LIBRARY_LOCK:
@@ -461,7 +470,7 @@ async def pretrain(epochs: int, batch_size:int, patience: int, repeat:int, concu
                 early_stopping_callback,
             ]
         )
-        await is_training_task_completed(
+        await is_task_completed(
             task_name=task_name,
             program_library=PROGRAM_LIBRARY,
             x=x_test,
@@ -506,7 +515,7 @@ async def solve(epochs: int, batch_size:int, patience: int, repeat:int, concurre
         for task_name in task_names:
             (x_train, y_train), (x_test, y_test) = synalinks.datasets.arcagi.load_data(task_name=task_name, arc_version=2)
             
-            completed = await is_training_task_completed(
+            completed = await is_task_completed(
                 task_name=task_name,
                 program_library=SUBMISSION_PROGRAM_LIBRARY,
                 x=x_test,
@@ -536,13 +545,14 @@ async def solve(epochs: int, batch_size:int, patience: int, repeat:int, concurre
                 loop.close()
     
     async def train_task_async(task_name, epochs, batch_size, patience, repeat):
-        task_checkpoint_filepath = os.path.join(SUBMISSION_PROGRAM_LIBRARY_FOLDER, f"{task_name}.json")
+        task_checkpoint_filepath = os.path.join(SUBMISSION_PROGRAM_LIBRARY_FOLDER, f"{task_name}.variables.json")
 
         program_checkpoint_callback = synalinks.callbacks.ProgramCheckpoint(
             filepath=task_checkpoint_filepath,
             monitor="val_reward",
             mode="max",
             save_best_only=True,
+            save_variables_only=True,
         )
         
         early_stopping_callback = synalinks.callbacks.EarlyStopping(
@@ -568,7 +578,7 @@ async def solve(epochs: int, batch_size:int, patience: int, repeat:int, concurre
             threshold=SEED_THRESHOLD,
         )
         
-        if len(seed_scripts) < NB_MAX_SEEDS:
+        if len(seed_scripts) == 0:
             seed_scripts.append(get_default_python_script())
         
         with SUBMISSION_PROGRAM_LIBRARY_LOCK:
@@ -594,13 +604,16 @@ async def solve(epochs: int, batch_size:int, patience: int, repeat:int, concurre
             ]
         )
         
-        await is_training_task_completed(
-            task_name=task_name,
-            program_library=SUBMISSION_PROGRAM_LIBRARY,
-            x=x_test,
-            y=y_test,
-            verbose=True,
-        )
+        with FINAL_SUBMISSION_LOCK:
+            FINAL_SUBMISSION[task_name] = []
+            results = await program.predict(x_test)
+            for result in results:
+                FINAL_SUBMISSION[task_name].append(
+                    {
+                        "attempt_1": result.get("output_grid"),
+                        "attempt_2": result.get("output_grid"),
+                    },
+                )
 
     print(f"🧠 Solving the {len(tasks_to_solve)} tasks...")
     with ThreadPoolExecutor(max_workers=concurrency) as executor:
